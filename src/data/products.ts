@@ -437,19 +437,11 @@ Together, these ingredients improve energy levels, promote nerve and brain healt
         'Consult your doctor if you are pregnant, planning to conceive, or breastfeeding.',
         'If you experience any unusual symptoms or side effects persist, contact your healthcare provider.',
         'This supplement is not a substitute for a balanced diet and healthy lifestyle.',
-      ],
-      sideEffects: [
         'Most side effects do not require any medical attention and disappear as your body adjusts to the medicine.',
-        'Consult your doctor if side effects persist or if you\'re worried about them.',
         'Generally well-tolerated when taken as directed.',
         'Mild gastrointestinal discomfort may occur in some cases.',
-      ],
-      expertAdvice: [
         'A balanced diet and healthy lifestyle can enhance the effectiveness in managing nutritional deficiencies.',
         'Maintain a consistent routine for taking the supplement to ensure better absorption.',
-        'Store properly in a cool, dry place away from direct sunlight and moisture.',
-        'Do not share with others as dosage and needs may vary between individuals.',
-        'Consult your doctor before taking if you have a fever or any serious illness.',
       ],
       glossary: {
         title: 'High Blood Pressure (Hypertension)',
