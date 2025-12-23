@@ -39,7 +39,7 @@ yarn-error.log*
 index.html
 styles.css
 script.js
-products/
+/products/
 css/
 js/
 assets/
