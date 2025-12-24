@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { products } from '@/data/products';
 import { Product } from '@/types';
 import { motion } from 'framer-motion';
@@ -10,9 +11,27 @@ import { useRef, useState } from 'react';
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Link href={`/products/${product.slug}`}>
+    <>
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
+          <div className="relative">
+            <Image 
+              src="/logo.png" 
+              alt="Loading" 
+              width={80} 
+              height={80} 
+              className="animate-spin"
+              style={{ animationDuration: '5s' }}
+            />
+            <p className="text-white text-center mt-4 font-semibold">Loading...</p>
+          </div>
+        </div>
+      )}
+      
+      <Link href={`/products/${product.slug}`} onClick={() => setIsLoading(true)}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -50,6 +69,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               </div>
             </motion.div>
     </Link>
+    </>
   );
 }
 

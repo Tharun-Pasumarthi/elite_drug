@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSlideshow from '@/components/HeroSlideshow';
 import AboutSection from '@/components/AboutSection';
-import ProductsSection from '@/components/ProductsSection';
+import CategorySection from '@/components/CategorySection';
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <HeroSlideshow />
       <AboutSection />
-      <ProductsSection />
+      <CategorySection />
       <Footer />
     </>
   );

@@ -70,15 +70,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           {/* Company Info */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Image 
-                src="/logo.png" 
-                alt="Elite Drug Logo" 
-                width={40} 
-                height={40} 
-                className="h-10 w-10 object-contain bg-white rounded-lg p-1"
-              />
-              <span className="text-xl font-bold">Elite Drug</span>
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <Image 
+                  src="/logo.png" 
+                  alt="Elite Drug Logo" 
+                  width={40} 
+                  height={40} 
+                  className="h-10 w-10 object-contain bg-white rounded-lg p-1"
+                />
+                <span className="text-xl font-bold lowercase" style={{ color: '#FF8C00' }}>elite drug</span>
+              </div>
+              <p className="text-xs text-blue-200 ml-14">enhancing your health</p>
             </div>
             <p className="text-blue-200 leading-relaxed">
               Transforming healthcare through innovative medical technology and comprehensive solutions.
@@ -90,23 +93,28 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Products</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/#products" className="text-blue-200 hover:text-white transition-colors">
-                  Diagnostic Imaging
+                <Link href="/categories/diabetes" className="text-blue-200 hover:text-white transition-colors">
+                  Diabetes Care
                 </Link>
               </li>
               <li>
-                <Link href="/#products" className="text-blue-200 hover:text-white transition-colors">
-                  Patient Monitoring
+                <Link href="/categories/heart-care" className="text-blue-200 hover:text-white transition-colors">
+                  Heart & Cardiovascular
                 </Link>
               </li>
               <li>
-                <Link href="/#products" className="text-blue-200 hover:text-white transition-colors">
-                  Surgical Tools
+                <Link href="/categories/stomach-care" className="text-blue-200 hover:text-white transition-colors">
+                  Gastro & Digestive
                 </Link>
               </li>
               <li>
-                <Link href="/#products" className="text-blue-200 hover:text-white transition-colors">
-                  Laboratory Equipment
+                <Link href="/categories/womens-health" className="text-blue-200 hover:text-white transition-colors">
+                  Women's Health
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="text-blue-200 hover:text-white transition-colors font-semibold">
+                  View All Products →
                 </Link>
               </li>
             </ul>
@@ -126,16 +134,8 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
-              <li>
-                <Link href="#" className="text-blue-200 hover:text-white transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-blue-200 hover:text-white transition-colors">
-                  News
-                </Link>
-              </li>
+              
+              
             </ul>
           </div>
 

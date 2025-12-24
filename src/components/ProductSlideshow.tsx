@@ -11,13 +11,31 @@ interface ProductSlideshowProps {
 export default function ProductSlideshow({ images }: ProductSlideshowProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+  
+  // Filter out empty images
+  const validImages = images.filter(img => img && img.trim() !== '');
+  
+  // If no valid images, show placeholder
+  if (validImages.length === 0) {
+    return (
+      <div className="relative h-[500px] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl border border-gray-200 flex items-center justify-center">
+        <div className="text-center">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="mx-auto mb-4">
+            <circle cx="60" cy="60" r="30" stroke="#0066CC" strokeWidth="3" opacity="0.3"/>
+            <path d="M60 40v40M40 60h40" stroke="#0066CC" strokeWidth="4" strokeLinecap="round"/>
+          </svg>
+          <p className="text-gray-400 font-medium">No product images available</p>
+        </div>
+      </div>
+    );
+  }
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
+    setCurrentSlide((prev) => (prev + 1) % validImages.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentSlide((prev) => (prev - 1 + validImages.length) % validImages.length);
   };
 
   return (
@@ -41,7 +59,7 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
             className="absolute inset-0 flex items-center justify-center"
           >
             <Image
-              src={images[currentSlide]}
+              src={validImages[currentSlide]}
               alt={`Product image ${currentSlide + 1}`}
               fill
               className="object-contain p-8"
@@ -73,7 +91,7 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
 
       {/* Thumbnails */}
       <div className="flex gap-3 justify-center flex-wrap">
-        {images.map((image, index) => (
+        {validImages.map((image, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}

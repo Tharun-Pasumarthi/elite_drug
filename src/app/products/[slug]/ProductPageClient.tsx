@@ -15,16 +15,19 @@ export default function ProductPageClient({ product }: { product: Product }) {
         <div className="container-custom py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
               <Image 
                 src="/logo.png" 
                 alt="Elite Drug Logo" 
                 width={40} 
                 height={40} 
-                className="h-10 w-10 object-contain"
+                className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
                 priority
               />
-              <span className="text-xl font-bold text-primary hidden sm:block">Elite Drug</span>
+              <div className="flex flex-col">
+                <span className="text-base sm:text-xl font-bold lowercase" style={{ color: '#FF8C00' }}>elite drug</span>
+                <span className="text-[8px] text-gray-600 tracking-wide hidden sm:block">enhancing your health</span>
+              </div>
             </Link>
             
             {/* Product Name */}
@@ -35,7 +38,10 @@ export default function ProductPageClient({ product }: { product: Product }) {
             {/* Home Button */}
             <Link 
               href="/" 
-              className="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold" 
+              className="flex-shrink-0 flex items-center gap-2 px-3 sm:px-4 py-2 text-white rounded-lg transition-colors font-semibold text-sm sm:text-base" 
+              style={{ backgroundColor: '#FF8C00' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E67E00'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FF8C00'}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

@@ -10,6 +10,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -39,9 +40,10 @@ export default function Header() {
   };
 
   const handleProductClick = (slug: string) => {
-    router.push(`/products/${slug}`);
+    setIsLoading(true);
     setSearchQuery('');
     setShowSuggestions(false);
+    router.push(`/products/${slug}`);
   };
 
   // Close suggestions when clicking outside
@@ -57,34 +59,55 @@ export default function Header() {
   }, []);
 
   return (
+    <>
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
+          <div className="relative">
+            <Image 
+              src="/logo.png" 
+              alt="Loading" 
+              width={80} 
+              height={80} 
+              className="animate-spin"
+              style={{ animationDuration: '1s' }}
+            />
+            <p className="text-white text-center mt-4 font-semibold">Loading...</p>
+          </div>
+        </div>
+      )}
+      
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container-custom">
         <div className="flex justify-between items-center py-4 gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <Image 
               src="/logo.png" 
               alt="Elite Drug Logo" 
               width={40} 
               height={40} 
-              className="h-10 w-10 object-contain"
+              className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
               priority
             />
-            <span className="text-xl md:text-2xl font-bold text-primary">Elite Drug</span>
+            <div className="flex flex-col">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold lowercase" style={{ color: '#FF8C00' }}>elite drug</span>
+              <span className="text-[8px] sm:text-[10px] text-gray-600 tracking-wide hidden sm:block">enhancing your health</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8">
-            <Link href="/" className="text-gray-700 hover:text-primary font-medium transition-colors">
+            <Link href="/" className="text-gray-700 font-medium transition-colors" style={{ '&:hover': { color: '#FF8C00' } }} onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>
               Home
             </Link>
-            <Link href="/#about" className="text-gray-700 hover:text-primary font-medium transition-colors">
+            <Link href="/#about" className="text-gray-700 font-medium transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>
               About
             </Link>
-            <Link href="/#products" className="text-gray-700 hover:text-primary font-medium transition-colors">
+            <Link href="/#categories" className="text-gray-700 font-medium transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>
               Products
             </Link>
-            <Link href="/#contact" className="text-gray-700 hover:text-primary font-medium transition-colors">
+            <Link href="/#contact" className="text-gray-700 font-medium transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>
               Contact
             </Link>
           </nav>
@@ -101,11 +124,19 @@ export default function Header() {
                 }}
                 onFocus={() => searchQuery && setShowSuggestions(true)}
                 placeholder="Search products..."
-                className="w-full px-4 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors"
+                className="w-full px-4 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:outline-none transition-colors"
+                style={{ '--focus-border-color': '#FF8C00' } as React.CSSProperties}
+                onFocus={(e) => { 
+                  if (searchQuery) setShowSuggestions(true);
+                  e.currentTarget.style.borderColor = '#FF8C00';
+                }}
+                onBlur={(e) => e.currentTarget.style.borderColor = '#E5E7EB'}
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 transition-colors"
+                onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -122,15 +153,17 @@ export default function Header() {
                           key={product.id}
                           type="button"
                           onClick={() => handleProductClick(product.slug)}
-                          className="w-full px-4 py-3 hover:bg-blue-50 flex items-start gap-3 text-left transition-colors"
+                          className="w-full px-4 py-3 flex items-start gap-3 text-left transition-colors"
+                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFF5E6'}
+                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
                         >
-                          <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-blue-100 rounded-lg flex-shrink-0 flex items-center justify-center">
-                            <span className="text-primary font-bold text-sm">{product.name.charAt(0)}</span>
+                          <div className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, rgba(255, 140, 0, 0.1), rgba(255, 140, 0, 0.2))' }}>
+                            <span className="font-bold text-sm" style={{ color: '#FF8C00' }}>{product.name.charAt(0)}</span>
                           </div>
                           <div className="flex-1 min-w-0">
                             <h4 className="font-semibold text-gray-900 truncate">{product.name}</h4>
                             <p className="text-sm text-gray-500 truncate">{product.category}</p>
-                            <p className="text-sm font-semibold text-primary mt-1">₹{product.price}</p>
+                            <p className="text-sm font-semibold mt-1" style={{ color: '#FF8C00' }}>₹{product.price}</p>
                           </div>
                         </button>
                       ))}
@@ -168,10 +201,10 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <nav className="md:hidden pb-4 flex flex-col gap-4">
-            <Link href="/" className="text-gray-700 hover:text-primary font-medium">Home</Link>
-            <Link href="/#about" className="text-gray-700 hover:text-primary font-medium">About</Link>
-            <Link href="/#products" className="text-gray-700 hover:text-primary font-medium">Products</Link>
-            <Link href="/#contact" className="text-gray-700 hover:text-primary font-medium">Contact</Link>
+            <Link href="/" className="text-gray-700 font-medium" onClick={() => setIsMenuOpen(false)} onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Home</Link>
+            <Link href="/#about" className="text-gray-700 font-medium" onClick={() => setIsMenuOpen(false)} onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>About</Link>
+            <Link href="/#categories" className="text-gray-700 font-medium" onClick={() => setIsMenuOpen(false)} onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Products</Link>
+            <Link href="/#contact" className="text-gray-700 font-medium" onClick={() => setIsMenuOpen(false)} onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Contact</Link>
             
             {/* Mobile Search */}
             <div className="relative">
@@ -181,11 +214,15 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
-                  className="w-full px-4 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none"
+                  className="w-full px-4 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:outline-none"
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#FF8C00'}
+                  onBlur={(e) => e.currentTarget.style.borderColor = '#E5E7EB'}
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#FF8C00'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -204,14 +241,16 @@ export default function Header() {
                         handleProductClick(product.slug);
                         setIsMenuOpen(false);
                       }}
-                      className="w-full px-3 py-2 hover:bg-blue-50 flex items-center gap-2 text-left text-sm"
+                      className="w-full px-3 py-2 flex items-center gap-2 text-left text-sm"
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFF5E6'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
                     >
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary/10 to-blue-100 rounded-lg flex-shrink-0 flex items-center justify-center">
-                        <span className="text-primary font-bold text-xs">{product.name.charAt(0)}</span>
+                      <div className="w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, rgba(255, 140, 0, 0.1), rgba(255, 140, 0, 0.2))' }}>
+                        <span className="font-bold text-xs" style={{ color: '#FF8C00' }}>{product.name.charAt(0)}</span>
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-semibold text-gray-900 truncate text-sm">{product.name}</h4>
-                        <p className="text-xs text-primary font-semibold">₹{product.price}</p>
+                        <p className="text-xs font-semibold" style={{ color: '#FF8C00' }}>₹{product.price}</p>
                       </div>
                     </button>
                   ))}
@@ -222,5 +261,6 @@ export default function Header() {
         )}
       </div>
     </header>
+    </>
   );
 }
