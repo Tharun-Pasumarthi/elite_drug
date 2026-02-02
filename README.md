@@ -378,13 +378,6 @@ Open Graph and Twitter Card meta tags for rich previews:
 
 ## 👨‍💼 Admin Panel
 
-Access the admin panel at `/admin`
-
-### Default Credentials
-```
-Email: admin@elitedrug.com
-Password: EliteDrug@2026
-```
 
 ### Admin Features
 
