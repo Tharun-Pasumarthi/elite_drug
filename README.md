@@ -1,4 +1,4 @@
-# 🏥 Elite Drug - Premium Pharmaceutical E-Commerce Platform
+# 🏥 Elite Drug - Enhancing Health
 
 <div align="center">
   <img src="public/logo.png" alt="Elite Drug Logo" width="200"/>
