@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { products } from '@/data/products';
 import { Product } from '@/types';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const ref = useRef(null);
@@ -24,7 +23,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               width={80} 
               height={80} 
               className="animate-spin"
-              style={{ animationDuration: '5s' }}
+              style={{ animationDuration: '3s' }}
             />
             <p className="text-white text-center mt-4 font-semibold">Loading...</p>
           </div>
@@ -39,11 +38,19 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         transition={{ duration: 0.5, delay: index * 0.1 }}
         className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 cursor-pointer h-full"
       >
-              <div className="h-64 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                  <circle cx="60" cy="60" r="30" stroke="#fff" strokeWidth="3" opacity="0.8"/>
-                  <path d="M60 40v40M40 60h40" stroke="#fff" strokeWidth="4" strokeLinecap="round"/>
-                </svg>
+              <div className="relative h-64 bg-gradient-to-br from-orange-100 to-orange-50 overflow-hidden">
+                <Image
+                  src={
+                    ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                      ? (product.images as any).main 
+                      : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                        ? (product.images as any).gallery[0]
+                        : '/images/placeholder.svg'
+                  }
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">
@@ -75,6 +82,26 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
 export default function ProductsSection() {
   const [showAll, setShowAll] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
+
   const displayedProducts = showAll ? products : products.slice(0, 6);
 
   return (

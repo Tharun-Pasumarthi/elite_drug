@@ -4,11 +4,29 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { products } from '@/data/products';
+import QuickViewModal from '@/components/QuickViewModal';
+import RecentlyViewed from '@/components/RecentlyViewed';
+import ScrollToTop from '@/components/ScrollToTop';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { Product } from '@/types';
 import { motion } from 'framer-motion';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
+import { 
+  Activity, 
+  Heart, 
+  Sandwich, 
+  Wine, 
+  Bone, 
+  Droplets, 
+  Sparkles, 
+  Wind, 
+  Pill, 
+  Flower2, 
+  Dumbbell, 
+  Brain, 
+  Syringe 
+} from 'lucide-react';
 
 // Category mapping
 const categoryMapping: Record<string, string[]> = {
@@ -27,83 +45,83 @@ const categoryMapping: Record<string, string[]> = {
   'antibiotics': ['Antibiotics'],
 };
 
-const categoryInfo: Record<string, { name: string; description: string; icon: string; color: string }> = {
+const categoryInfo: Record<string, { name: string; description: string; icon: React.ElementType; color: string }> = {
   'diabetes': {
     name: 'Diabetes Care',
     description: 'Comprehensive solutions for blood sugar management and diabetic care',
-    icon: '🩸',
+    icon: Activity,
     color: 'from-orange-400 to-red-400',
   },
   'heart-care': {
     name: 'Heart Care',
     description: 'Cardiovascular health and wellness products',
-    icon: '❤️',
+    icon: Heart,
     color: 'from-purple-400 to-pink-400',
   },
   'stomach-care': {
     name: 'Stomach & Digestive Care',
     description: 'Complete digestive health and gastro solutions',
-    icon: '🫃',
+    icon: Sandwich,
     color: 'from-green-400 to-teal-400',
   },
   'liver-care': {
     name: 'Liver Care',
     description: 'Liver health and detoxification support',
-    icon: '🫀',
+    icon: Wine,
     color: 'from-red-400 to-orange-400',
   },
   'bone-joint': {
     name: 'Bone, Joint & Muscle Care',
     description: 'Support for bone strength, joint mobility, and muscle health',
-    icon: '🦴',
+    icon: Bone,
     color: 'from-blue-400 to-cyan-400',
   },
   'kidney-care': {
     name: 'Kidney Care',
     description: 'Renal health and urinary wellness',
-    icon: '🫘',
+    icon: Droplets,
     color: 'from-cyan-400 to-blue-400',
   },
   'derma-care': {
     name: 'Derma Care',
     description: 'Skin health and dermatology solutions',
-    icon: '✨',
+    icon: Sparkles,
     color: 'from-pink-400 to-rose-400',
   },
   'respiratory-care': {
     name: 'Respiratory Care',
     description: 'Breathing and lung health support',
-    icon: '🫁',
+    icon: Wind,
     color: 'from-teal-400 to-green-400',
   },
   'pain-management': {
     name: 'Pain Management',
     description: 'Effective pain relief and inflammation control',
-    icon: '💊',
+    icon: Pill,
     color: 'from-orange-400 to-amber-400',
   },
   'womens-health': {
     name: "Women's Health",
     description: 'Prenatal care, anemia management, and hormonal support',
-    icon: '🌸',
+    icon: Flower2,
     color: 'from-pink-400 to-purple-400',
   },
   'vitamins-supplements': {
     name: 'Vitamins & Supplements',
     description: 'Complete nutritional support and wellness products',
-    icon: '💪',
+    icon: Dumbbell,
     color: 'from-yellow-400 to-orange-400',
   },
   'neuropathy': {
     name: 'Neuropathy & Brain Health',
     description: 'Nerve health and neurological support',
-    icon: '🧠',
+    icon: Brain,
     color: 'from-indigo-400 to-purple-400',
   },
   'antibiotics': {
     name: 'Antibiotics',
     description: 'Bacterial infection treatment and management',
-    icon: '💉',
+    icon: Syringe,
     color: 'from-red-400 to-pink-400',
   },
 };
@@ -122,7 +140,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               width={80} 
               height={80} 
               className="animate-spin"
-              style={{ animationDuration: '5s' }}
+              style={{ animationDuration: '3s' }}
             />
             <p className="text-white text-center mt-4 font-semibold">Loading...</p>
           </div>
@@ -134,35 +152,60 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: index * 0.05 }}
-          className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 cursor-pointer h-full"
+          className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 dark:border-slate-700 cursor-pointer h-full group"
         >
-          <div className="h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-            <svg width="100" height="100" viewBox="0 0 120 120" fill="none">
-              <circle cx="60" cy="60" r="30" stroke="#fff" strokeWidth="3" opacity="0.8"/>
-              <path d="M60 40v40M40 60h40" stroke="#fff" strokeWidth="4" strokeLinecap="round"/>
-            </svg>
+          <div className="relative h-48 bg-gradient-to-br from-orange-100 to-orange-50 dark:from-orange-900/20 dark:to-orange-800/20 overflow-hidden">
+            <Image
+              src={
+                ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                  ? (product.images as any).main 
+                  : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                    ? (product.images as any).gallery[0]
+                    : '/images/placeholder.svg'
+              }
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+            {product.isPrescription && (
+              <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg">
+                Rx
+              </div>
+            )}
+            
+            {/* Quick View Button */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onQuickView(product);
+              }}
+              className="absolute top-3 left-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm text-gray-900 dark:text-gray-100 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:bg-white dark:hover:bg-slate-800 transition-all opacity-0 group-hover:opacity-100"
+            >
+              Quick View
+            </button>
           </div>
           <div className="p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
               {product.name}
             </h3>
-            <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
               {product.shortDescription}
             </p>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-2xl font-bold text-[#FF8C00]">₹{product.price}</p>
+                <p className="text-2xl font-bold text-[#FF8C00] dark:text-orange-400">₹{product.price}</p>
                 {product.mrp > product.price && (
-                  <p className="text-sm text-gray-400 line-through">₹{product.mrp}</p>
+                  <p className="text-sm text-gray-400 dark:text-gray-500 line-through">₹{product.mrp}</p>
                 )}
               </div>
               {product.isPrescription && (
-                <span className="px-3 py-1 bg-red-100 text-red-600 rounded-full text-xs font-semibold">
+                <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-xs font-semibold">
                   Rx
                 </span>
               )}
             </div>
-            <button className="w-full bg-[#FF8C00] text-white py-3 rounded-lg font-semibold hover:bg-[#FF7C00] transition-colors">
+            <button className="w-full bg-[#FF8C00] dark:bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-[#FF7C00] dark:hover:bg-orange-700 transition-colors">
               View Details
             </button>
           </div>
@@ -176,6 +219,28 @@ export default function CategoryPage() {
   const params = useParams();
   const categoryId = params?.id as string;
   const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+
+  // Fetch products from API
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
   
   const category = categoryInfo[categoryId];
   const categoryFilters = categoryMapping[categoryId] || [];
@@ -196,7 +261,7 @@ export default function CategoryPage() {
     }
 
     return filtered;
-  }, [categoryFilters, searchQuery]);
+  }, [categoryFilters, searchQuery, products]);
 
   if (!category) {
     return (
@@ -219,6 +284,35 @@ export default function CategoryPage() {
     <>
       <Header />
       
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
+          <div className="relative">
+            <Image 
+              src="/logo.png" 
+              alt="Loading" 
+              width={100} 
+              height={100} 
+              className="animate-spin"
+              style={{ animationDuration: '3s' }}
+            />
+            <p className="text-white text-center mt-4 font-semibold text-lg">Loading Products...</p>
+          </div>
+        </div>
+      )}
+      
+      {/* Breadcrumbs */}
+      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 py-4">
+        <div className="container mx-auto px-6">
+          <Breadcrumbs 
+            items={[
+              { label: 'Categories', href: '/#categories' },
+              { label: category.name, href: `/categories/${categoryId}` }
+            ]}
+          />
+        </div>
+      </div>
+      
       {/* Category Header */}
       <section className={`relative py-20 bg-gradient-to-br ${category.color} overflow-hidden`}>
         <div className="absolute inset-0 bg-black/10" />
@@ -229,7 +323,9 @@ export default function CategoryPage() {
             transition={{ duration: 0.6 }}
             className="text-center text-white"
           >
-            <div className="text-6xl mb-4">{category.icon}</div>
+            <div className="mb-6 flex justify-center">
+              <category.icon className="w-24 h-24 text-white" strokeWidth={1.5} />
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{category.name}</h1>
             <p className="text-xl max-w-2xl mx-auto opacity-90">{category.description}</p>
             <div className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full">
@@ -241,7 +337,7 @@ export default function CategoryPage() {
       </section>
 
       {/* Search Bar */}
-      <section className="py-8 bg-gray-50 border-b">
+      <section className="py-8 bg-gray-50 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto">
             <div className="relative">
@@ -250,10 +346,10 @@ export default function CategoryPage() {
                 placeholder="Search products by name or composition..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 pl-14 rounded-full border-2 border-gray-200 focus:border-[#FF8C00] focus:outline-none text-lg"
+                className="w-full px-6 py-4 pl-14 rounded-full border-2 border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#FF8C00] dark:focus:border-orange-500 focus:outline-none text-lg"
               />
               <svg
-                className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400"
+                className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 dark:text-gray-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -268,7 +364,7 @@ export default function CategoryPage() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -281,13 +377,13 @@ export default function CategoryPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-6">
           {filteredProducts.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">No Products Found</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">No Products Found</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
                 {searchQuery ? 'Try adjusting your search terms' : 'Products coming soon to this category'}
               </p>
               {searchQuery && (
@@ -302,7 +398,15 @@ export default function CategoryPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {filteredProducts.map((product, index) => (
-                <ProductCard key={product.id} product={product} index={index} />
+                <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  index={index} 
+                  onQuickView={(p) => {
+                    setQuickViewProduct(p);
+                    setIsQuickViewOpen(true);
+                  }}
+                />
               ))}
             </div>
           )}
@@ -310,11 +414,11 @@ export default function CategoryPage() {
       </section>
 
       {/* Back to Categories */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 dark:bg-slate-900">
         <div className="container mx-auto px-6 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 rounded-full font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-300 rounded-full font-semibold hover:border-[#FF8C00] dark:hover:border-orange-500 hover:text-[#FF8C00] dark:hover:text-orange-400 transition-all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -323,6 +427,22 @@ export default function CategoryPage() {
           </Link>
         </div>
       </section>
+
+      {/* Recently Viewed */}
+      <RecentlyViewed />
+
+      {/* Quick View Modal */}
+      <QuickViewModal 
+        product={quickViewProduct}
+        isOpen={isQuickViewOpen}
+        onClose={() => {
+          setIsQuickViewOpen(false);
+          setQuickViewProduct(null);
+        }}
+      />
+
+      {/* Scroll to Top */}
+      <ScrollToTop />
 
       <Footer />
     </>
