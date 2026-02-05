@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import ProductPageClient from './ProductPageClient';
 import type { Metadata } from 'next';
+import { createAdminClient } from '@/lib/supabase/server';
 
 // Disable static generation - fetch fresh data on each request
 export const dynamic = 'force-dynamic';
@@ -8,32 +9,61 @@ export const revalidate = 0;
 
 async function getProduct(slug: string) {
   try {
-    // Use relative URL for server-side fetching in production
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+    console.log('🔍 Fetching product with slug:', slug);
     
-    const res = await fetch(`${baseUrl}/api/products`, {
-      cache: 'no-store',
-      headers: {
-        'Cache-Control': 'no-cache',
-      },
-    });
+    const supabase = await createAdminClient();
     
-    if (!res.ok) {
-      console.error('Failed to fetch products:', res.status);
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('slug', slug)
+      .single();
+    
+    if (error) {
+      console.error('❌ Supabase error:', error);
       return null;
     }
     
-    const products = await res.json();
-    const product = products.find((p: any) => p.slug === slug);
-    
-    console.log('🔍 Found product for slug:', slug, product ? 'YES' : 'NO');
-    if (product) {
-      console.log('📦 Product images:', product.images);
+    if (!data) {
+      console.log('❌ No product found for slug:', slug);
+      return null;
     }
     
-    return product;
+    console.log('✅ Found product:', data.name);
+    
+    // Normalize images format
+    const normalizeImages = (images: any) => {
+      if (!images) {
+        return {
+          main: '/images/placeholder.svg',
+          gallery: []
+        };
+      }
+      
+      if (typeof images === 'object' && images.main && !Array.isArray(images.main)) {
+        return {
+          main: images.main,
+          gallery: Array.isArray(images.gallery) ? images.gallery : []
+        };
+      }
+      
+      if (Array.isArray(images)) {
+        return {
+          main: images[0] || '/images/placeholder.svg',
+          gallery: images
+        };
+      }
+      
+      return {
+        main: '/images/placeholder.svg',
+        gallery: []
+      };
+    };
+    
+    return {
+      ...data,
+      images: normalizeImages(data.images)
+    };
   } catch (error) {
     console.error('Error fetching product:', error);
     return null;
@@ -55,9 +85,7 @@ export async function generateMetadata({
   }
 
   const productImage = (product.images as any)?.main || (product.images as any)?.gallery?.[0] || '/logo.png';
-  const baseUrl = process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}` 
-    : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://elite-drug.vercel.app';
 
   return {
     title: `${product.name} | Elite Drug`,
