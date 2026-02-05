@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import ProductPageClient from './ProductPageClient';
 import type { Metadata } from 'next';
 import { createAdminClient } from '@/lib/supabase/server';
+import { getOriginalSlug } from '@/lib/urlEncryption';
 
 // Disable static generation - fetch fresh data on each request
 export const dynamic = 'force-dynamic';
@@ -9,14 +10,16 @@ export const revalidate = 0;
 
 async function getProduct(slug: string) {
   try {
-    console.log('🔍 Fetching product with slug:', slug);
+    // Decode slug if URL encryption is enabled
+    const originalSlug = getOriginalSlug(slug);
+    console.log('🔍 Fetching product with slug:', originalSlug, '(from:', slug, ')');
     
     const supabase = await createAdminClient();
     
     const { data, error } = await supabase
       .from('products')
       .select('*')
-      .eq('slug', slug)
+      .eq('slug', originalSlug)
       .single();
     
     if (error) {
@@ -25,7 +28,7 @@ async function getProduct(slug: string) {
     }
     
     if (!data) {
-      console.log('❌ No product found for slug:', slug);
+      console.log('❌ No product found for slug:', originalSlug);
       return null;
     }
     
@@ -86,6 +89,11 @@ export async function generateMetadata({
 
   const productImage = (product.images as any)?.main || (product.images as any)?.gallery?.[0] || '/logo.png';
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://elite-drug.vercel.app';
+  
+  // Ensure image URL is absolute for proper embedding
+  const absoluteImageUrl = productImage.startsWith('http') 
+    ? productImage 
+    : `${baseUrl}${productImage.startsWith('/') ? '' : '/'}${productImage}`;
 
   return {
     title: `${product.name} | Elite Drug`,
@@ -94,7 +102,7 @@ export async function generateMetadata({
       title: product.name,
       description: product.shortDescription || product.description,
       images: [{
-        url: productImage,
+        url: absoluteImageUrl,
         width: 1200,
         height: 630,
         alt: product.name,
@@ -106,7 +114,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: product.name,
       description: product.shortDescription || product.description,
-      images: [productImage],
+      images: [absoluteImageUrl],
     },
   };
 }

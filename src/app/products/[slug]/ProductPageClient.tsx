@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types';
 import { useEffect } from 'react';
+import { getAbsoluteProductUrl, getAbsoluteImageUrl } from '@/lib/urlUtils';
 
 export default function ProductPageClient({ product }: { product: Product }) {
   // Track recently viewed products
@@ -219,10 +220,10 @@ export default function ProductPageClient({ product }: { product: Product }) {
                   className="mt-8 pt-6 border-t border-gray-200 dark:border-slate-600"
                 >
                   <ShareButtons 
-                    url={typeof window !== 'undefined' ? window.location.href : ''}
+                    url={getAbsoluteProductUrl(product.slug)}
                     title={product.name}
                     description={product.shortDescription}
-                    imageUrl={(product.images as any)?.main || ''}
+                    imageUrl={getAbsoluteImageUrl((product.images as any)?.main)}
                   />
                 </motion.div>
 

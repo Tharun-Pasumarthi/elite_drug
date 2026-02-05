@@ -23,17 +23,31 @@ export default function ShareButtons({ url, title, description = '', imageUrl }:
   const [copied, setCopied] = useState(false);
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
-  // Construct full image URL
-  const fullImageUrl = imageUrl ? 
-    (imageUrl.startsWith('http') ? imageUrl : `${window.location.origin}${imageUrl}`) : '';
+  // Construct full absolute image URL for proper embedding
+  const getAbsoluteImageUrl = () => {
+    if (!imageUrl) return '';
+    
+    // Already absolute URL (Cloudinary or other CDN)
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      return imageUrl;
+    }
+    
+    // Relative URL - make it absolute
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+                    (typeof window !== 'undefined' ? window.location.origin : '');
+    return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+  };
+
+  const fullImageUrl = getAbsoluteImageUrl();
 
   const shareOnWhatsApp = () => {
-    // WhatsApp text with image mention
-    let text = `${title}\n\n${description}`;
+    // WhatsApp will fetch the Open Graph image from the URL
+    // We also include it in text for reference
+    let text = `📦 *${title}*\n\n${description}`;
     if (fullImageUrl) {
-      text += `\n\n🖼️ Image: ${fullImageUrl}`;
+      text += `\n\n📸 ${fullImageUrl}`;
     }
-    text += `\n\n🔗 ${url}`;
+    text += `\n\n🔗 View Product: ${url}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
