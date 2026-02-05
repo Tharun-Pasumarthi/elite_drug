@@ -3,12 +3,17 @@ import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 // Hashed password for 'EliteDrug@2026'
+// Generated with: bcrypt.hashSync('EliteDrug@2026', 10)
 const ADMIN_CREDENTIALS = {
   email: 'admin@elitedrug.com',
-  passwordHash: '$2a$10$YourHashedPasswordHere', // Replace with actual bcrypt hash
+  passwordHash: '$2b$10$oPORiA49aYRyXUC9feLO3.1Wa2x36EPmBOr.qkkK7AJAheiI2azUG', // EliteDrug@2026
 };
 
-const JWT_SECRET = process.env.JWT_SECRET || 'elite-drug-secret-key-2026';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     // Validate credentials with bcrypt
     const isValidEmail = email === ADMIN_CREDENTIALS.email;
-    const isValidPassword = password === 'EliteDrug@2026'; // Temporary for transition
+    const isValidPassword = await bcrypt.compare(password, ADMIN_CREDENTIALS.passwordHash);
     
     if (isValidEmail && isValidPassword) {
       // Generate JWT token

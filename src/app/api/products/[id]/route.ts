@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseAdmin } from '@/lib/supabase';
 
 // GET - Fetch single product
 export async function GET(
@@ -10,7 +10,7 @@ export async function GET(
     const params = await Promise.resolve(context.params);
     const { id } = params;
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('products')
       .select('*')
       .eq('id', id)

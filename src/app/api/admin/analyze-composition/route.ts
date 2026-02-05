@@ -119,7 +119,7 @@ CRITICAL: Return ONLY the JSON object. Start with { and end with }. NO code bloc
             }
           ],
           temperature: 0.2,
-          max_tokens: 3500,
+          max_tokens: 6000,
         }),
         signal: controller.signal,
       });
@@ -175,26 +175,54 @@ CRITICAL: Return ONLY the JSON object. Start with { and end with }. NO code bloc
       console.log('🔍 First 200 chars:', aiResponse.substring(0, 200));
       console.log('🔍 Last 200 chars:', aiResponse.substring(Math.max(0, aiResponse.length - 200)));
 
-      // Check if response seems complete (should end with })
-      const trimmed = aiResponse.trim();
-      if (!trimmed.endsWith('}')) {
-        console.error('⚠️ Response appears truncated - does not end with }');
-        console.error('Last 500 chars:', trimmed.substring(Math.max(0, trimmed.length - 500)));
-        return NextResponse.json(
-          { 
-            error: 'AI response was truncated',
-            details: 'The AI response exceeded the token limit. Response length: ' + aiResponse.length + ' characters',
-            suggestion: 'Try again or simplify the product composition'
-          },
-          { status: 500 }
-        );
-      }
-
       // Parse the JSON response
       let parsedData;
+      let responseToUse = aiResponse.trim();
+      
+      // Check if response seems complete (should end with })
+      if (!responseToUse.endsWith('}')) {
+        console.error('⚠️ Response appears truncated - does not end with }');
+        console.error('Last 500 chars:', responseToUse.substring(Math.max(0, responseToUse.length - 500)));
+        
+        // Try to recover by appending missing closing braces
+        const openBraces = (responseToUse.match(/\{/g) || []).length;
+        const closeBraces = (responseToUse.match(/\}/g) || []).length;
+        const missingBraces = openBraces - closeBraces;
+        
+        if (missingBraces > 0 && missingBraces <= 5) {
+          console.log('🔧 Attempting to recover with', missingBraces, 'closing braces');
+          responseToUse = responseToUse + '}'.repeat(missingBraces);
+          
+          // Try parsing the recovered JSON
+          try {
+            JSON.parse(responseToUse);
+            console.log('✅ Successfully recovered truncated JSON');
+          } catch (e) {
+            console.error('❌ Recovery failed');
+            return NextResponse.json(
+              { 
+                error: 'AI response was truncated and could not be recovered',
+                details: 'The AI response exceeded the token limit. Response length: ' + aiResponse.length + ' characters',
+                suggestion: 'Try again - the product composition might be too complex'
+              },
+              { status: 500 }
+            );
+          }
+        } else {
+          return NextResponse.json(
+            { 
+              error: 'AI response was truncated',
+              details: 'The AI response exceeded the token limit. Response length: ' + aiResponse.length + ' characters',
+              suggestion: 'Try again or simplify the product composition'
+            },
+            { status: 500 }
+          );
+        }
+      }
+
       try {
         // Clean the response - remove markdown code blocks if present
-        let cleanedResponse = aiResponse.trim();
+        let cleanedResponse = responseToUse;
         
         // Remove markdown code blocks
         cleanedResponse = cleanedResponse.replace(/```json\s*/gi, '');

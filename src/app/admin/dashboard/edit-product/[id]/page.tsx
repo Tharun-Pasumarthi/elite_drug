@@ -23,6 +23,7 @@ interface Product {
   composition: string;
   category: string;
   short_description: string;
+  about?: string;
   price: number;
   mrp: number;
   is_prescription: boolean;
@@ -46,6 +47,7 @@ export default function EditProduct() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [formKey, setFormKey] = useState(0);
 
   useEffect(() => {
     fetchProduct();
@@ -245,6 +247,17 @@ export default function EditProduct() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log('✅ AI Response received:', data);
+        console.log('📝 Fields filled:', {
+          category: !!data.category,
+          shortDescription: !!data.shortDescription,
+          about: !!data.about,
+          usage: !!data.usage,
+          sideEffects: !!data.sideEffects,
+          precautions: !!data.precautions,
+          benefits: !!data.benefits,
+          howItWorks: !!data.howItWorks,
+        });
         setProduct(prev => prev ? {
           ...prev,
           category: data.category || prev.category,
@@ -258,6 +271,8 @@ export default function EditProduct() {
           benefits: data.benefits || prev.benefits,
           how_it_works: data.howItWorks || prev.how_it_works,
         } : null);
+        setFormKey(prev => prev + 1); // Force form re-render
+        console.log('🔄 Form re-render triggered');
         alert('✨ AI analysis complete!');
       } else {
         const errorData = await response.json().catch(() => ({}));
@@ -372,7 +387,7 @@ export default function EditProduct() {
       </header>
 
       <div className="max-w-5xl mx-auto p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form key={formKey} onSubmit={handleSubmit} className="space-y-6">
           {/* Basic Information */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-6">

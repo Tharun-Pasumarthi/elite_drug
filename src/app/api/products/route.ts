@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerClient } from '@/lib/supabase/server';
+import { createServerClient, createAdminClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
 // GET - Fetch all products
@@ -7,7 +7,7 @@ export async function GET() {
   try {
     console.log('📡 Fetching products from Supabase...');
     
-    const supabase = await createServerClient();
+    const supabase = await createAdminClient();
     
     const { data, error } = await supabase
       .from('products')
@@ -114,14 +114,36 @@ export async function GET() {
 // POST - Create new product
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createServerClient();
+    const supabase = await createAdminClient();
     const productData = await request.json();
     
-    // Generate slug from name
-    const slug = productData.name
+    // Generate base slug from name
+    let baseSlug = productData.name
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
+
+    // Check if slug exists and make it unique if necessary
+    let slug = baseSlug;
+    let counter = 1;
+    let slugExists = true;
+
+    while (slugExists) {
+      const { data: existing } = await supabase
+        .from('products')
+        .select('id')
+        .eq('slug', slug)
+        .single();
+
+      if (!existing) {
+        slugExists = false;
+      } else {
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+    }
+
+    console.log('📝 Generated unique slug:', slug);
 
     // Convert camelCase to snake_case for PostgreSQL
     const dbData: any = {

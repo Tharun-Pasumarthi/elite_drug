@@ -60,6 +60,17 @@ export default function AddProductPage() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log('✅ AI Response received:', data);
+        console.log('📝 Fields filled:', {
+          category: !!data.category,
+          shortDescription: !!data.shortDescription,
+          about: !!data.about,
+          usage: !!data.usage,
+          sideEffects: !!data.sideEffects,
+          precautions: !!data.precautions,
+          benefits: !!data.benefits,
+          howItWorks: !!data.howItWorks,
+        });
         setFormData(prev => ({
           ...prev,
           category: data.category || prev.category,
