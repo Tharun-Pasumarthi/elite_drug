@@ -295,7 +295,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -314,32 +314,51 @@ export default function Header() {
           <nav className="md:hidden pb-4 flex flex-col gap-4">
             <Link 
               href="/" 
-              className="relative text-gray-700 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] transition-all" 
+              className="relative text-gray-700 dark:text-gray-300 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] dark:hover:border-orange-500 transition-all" 
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link 
               href="/#about" 
-              className="relative text-gray-700 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] transition-all" 
+              className="relative text-gray-700 dark:text-gray-300 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] dark:hover:border-orange-500 transition-all" 
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
             <Link 
               href="/#categories" 
-              className="relative text-gray-700 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] transition-all" 
+              className="relative text-gray-700 dark:text-gray-300 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] dark:hover:border-orange-500 transition-all" 
               onClick={() => setIsMenuOpen(false)}
             >
               Products
             </Link>
             <Link 
               href="/#contact" 
-              className="relative text-gray-700 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] transition-all" 
+              className="relative text-gray-700 dark:text-gray-300 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] dark:hover:border-orange-500 transition-all" 
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
             </Link>
+            <Link 
+              href="/announcements" 
+              className="relative text-gray-700 dark:text-gray-300 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] dark:hover:border-orange-500 transition-all flex items-center gap-1" 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Megaphone size={18} />
+              Announcements
+              {announcementCount > 0 && (
+                <span className="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse ml-2">
+                  {announcementCount > 9 ? '9+' : announcementCount}
+                </span>
+              )}
+            </Link>
+            
+            {/* Theme Toggle for Mobile */}
+            <div className="flex items-center gap-2 py-2">
+              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Theme:</span>
+              <ThemeToggle />
+            </div>
             
             {/* Modern Mobile Search */}
             <div className="relative">
@@ -350,7 +369,7 @@ export default function Header() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
-                    className="w-full px-5 py-3 pr-12 rounded-2xl border-0 bg-gradient-to-r from-gray-50 to-white shadow-lg focus:shadow-xl focus:shadow-orange-100 transition-all duration-300 outline-none ring-2 ring-transparent focus:ring-orange-400/50"
+                    className="w-full px-5 py-3 pr-12 rounded-2xl border-0 bg-gradient-to-r from-gray-50 to-white dark:from-slate-800 dark:to-slate-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 shadow-lg focus:shadow-xl focus:shadow-orange-100 dark:focus:shadow-orange-900/30 transition-all duration-300 outline-none ring-2 ring-transparent focus:ring-orange-400/50 dark:focus:ring-orange-500/50"
                   />
                   <button
                     type="submit"
@@ -365,7 +384,7 @@ export default function Header() {
 
               {/* Modern Mobile Search Suggestions */}
               {searchQuery && filteredProducts.length > 0 && (
-                <div className="mt-3 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 max-h-64 overflow-hidden">
+                <div className="mt-3 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-700 max-h-64 overflow-hidden">
                   <div className="overflow-y-auto max-h-64">
                     {filteredProducts.map((product, idx) => (
                       <button
@@ -375,21 +394,27 @@ export default function Header() {
                           handleProductClick(product.slug);
                           setIsMenuOpen(false);
                         }}
-                        className="w-full px-3 py-2.5 flex items-center gap-2.5 text-left text-sm hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100/50 transition-all duration-200 group"
+                        className="w-full px-3 py-2.5 flex items-center gap-2.5 text-left text-sm hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100/50 dark:hover:from-orange-900/20 dark:hover:to-orange-800/20 transition-all duration-200 group"
                         style={{
                           animation: `slideIn 0.3s ease-out ${idx * 0.05}s both`
                         }}
                       >
-                        <div className="relative w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100 shadow-md group-hover:shadow-lg transition-all">
+                        <div className="relative w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 shadow-md group-hover:shadow-lg transition-all">
                           <Image
-                            src={Array.isArray(product.images) ? product.images[0] : product.images?.main}
+                            src={
+                              ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                                ? (product.images as any).main 
+                                : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                                  ? (product.images as any).gallery[0]
+                                  : '/images/placeholder.svg'
+                            }
                             alt={product.name}
                             fill
                             className="object-cover"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-gray-900 truncate text-sm group-hover:text-orange-600 transition-colors">{product.name}</h4>
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-sm group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">{product.name}</h4>
                           <p className="text-xs font-semibold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">₹{product.price}</p>
                         </div>
                         <svg className="w-4 h-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" fill="none" viewBox="0 0 24 24">
