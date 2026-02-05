@@ -8,7 +8,11 @@ export const revalidate = 0;
 
 async function getProduct(slug: string) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    // Use relative URL for server-side fetching in production
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+    
     const res = await fetch(`${baseUrl}/api/products`, {
       cache: 'no-store',
       headers: {
@@ -51,7 +55,9 @@ export async function generateMetadata({
   }
 
   const productImage = (product.images as any)?.main || (product.images as any)?.gallery?.[0] || '/logo.png';
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}` 
+    : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
 
   return {
     title: `${product.name} | Elite Drug`,
