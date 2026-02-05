@@ -251,7 +251,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
       <ProductTabs product={product} />
 
       {/* Glossary */}
-      {product.details.glossary && (
+      {product.details?.glossary && (
         <section className="py-16 bg-gray-50 dark:bg-slate-900">
           <div className="container-custom">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
