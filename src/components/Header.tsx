@@ -117,8 +117,8 @@ export default function Header() {
             <Image 
               src="/logo.png" 
               alt="Loading" 
-              width={80} 
-              height={80} 
+              width={60} 
+              height={60} 
               className="animate-spin"
               style={{ animationDuration: '3s' }}
             />

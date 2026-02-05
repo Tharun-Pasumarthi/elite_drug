@@ -137,8 +137,8 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
             <Image 
               src="/logo.png" 
               alt="Loading" 
-              width={80} 
-              height={80} 
+              width={60} 
+              height={60} 
               className="animate-spin"
               style={{ animationDuration: '3s' }}
             />
@@ -291,8 +291,8 @@ export default function CategoryPage() {
             <Image 
               src="/logo.png" 
               alt="Loading" 
-              width={100} 
-              height={100} 
+              width={60} 
+              height={60} 
               className="animate-spin"
               style={{ animationDuration: '3s' }}
             />
