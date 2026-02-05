@@ -9,7 +9,7 @@ const ADMIN_CREDENTIALS = {
   passwordHash: '$2b$10$oPORiA49aYRyXUC9feLO3.1Wa2x36EPmBOr.qkkK7AJAheiI2azUG', // EliteDrug@2026
 };
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET environment variable is required');

@@ -22,6 +22,7 @@ import {
 interface Product {
   id: string;
   name: string;
+  slug?: string;
   category: string;
   price: number;
   mrp: number;
@@ -302,7 +303,7 @@ export default function AdminDashboard() {
                               {(() => {
                                 const imageUrl = Array.isArray(product.images) 
                                   ? product.images[0] 
-                                  : product.images?.main || product.images?.gallery?.[0];
+                                  : (product.images as any)?.main || (product.images as any)?.gallery?.[0];
                                 return imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '' ? (
                                   <Image
                                     src={imageUrl}

@@ -126,7 +126,7 @@ const categoryInfo: Record<string, { name: string; description: string; icon: Re
   },
 };
 
-function ProductCard({ product, index }: { product: Product; index: number }) {
+function ProductCard({ product, index, onQuickView }: { product: Product; index: number; onQuickView: (product: Product) => void }) {
   const [isLoading, setIsLoading] = useState(false);
 
   return (

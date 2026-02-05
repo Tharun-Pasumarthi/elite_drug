@@ -12,17 +12,32 @@ export interface Product {
   consumeType?: string;
   expiryDate?: string;
   features: string[];
+  
+  // Flat properties (from database)
+  about?: string;
+  usage?: string;
+  benefits?: string;
+  side_effects?: string;
+  sideEffects?: string;
+  precautions?: string;
+  storage?: string;
+  howItWorks?: string;
+  
   images: {
     main: string;
     gallery: string[];
   };
   details: {
     about: string;
+    usage?: string;
     uses: {
       title: string;
       description: string;
     }[];
     benefits: string[];
+    side_effects?: string;
+    sideEffects?: string;
+    precautions?: string;
     howItWorks: string;
     directions: string[];
     storage: string[];
