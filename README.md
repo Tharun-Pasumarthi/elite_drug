@@ -4,6 +4,8 @@
   <img src="public/logo.png" alt="Elite Drug Logo" width="200"/>
   
   **Your Health, Our Priority - Delivering Quality Medicines Since 2016**
+  
+  <!-- Production Build Ready -->
 
   [![Next.js](https://img.shields.io/badge/Next.js-16.1.1-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
