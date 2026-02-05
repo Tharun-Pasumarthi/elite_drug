@@ -78,7 +78,7 @@ export default function EditProduct() {
           imageArray = productImages.gallery.filter((img: any) => img && typeof img === 'string' && img.trim() !== '');
         } else {
           // Otherwise try to extract array values
-          imageArray = Object.values(productImages).filter((img: any) => img && typeof img === 'string' && img.trim() !== '');
+          imageArray = Object.values(productImages).filter((img: any) => img && typeof img === 'string' && img.trim() !== '') as string[];
         }
       }
       
