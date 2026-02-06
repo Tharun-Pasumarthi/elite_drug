@@ -65,7 +65,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                       src={validImages[selectedImageIndex] || '/images/placeholder.svg'}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className="object-contain p-6"
                     />
                     {product.isPrescription && (
                       <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
@@ -91,7 +91,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                             src={img}
                             alt={`${product.name} ${idx + 1}`}
                             fill
-                            className="object-cover"
+                            className="object-contain p-1"
                           />
                         </button>
                       ))}

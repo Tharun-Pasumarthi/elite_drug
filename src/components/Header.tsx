@@ -248,7 +248,7 @@ export default function Header() {
                               }
                               alt={product.name}
                               fill
-                              className="object-cover"
+                              className="object-contain p-2"
                             />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -407,7 +407,7 @@ export default function Header() {
                             }
                             alt={product.name}
                             fill
-                            className="object-cover"
+                            className="object-contain p-2"
                           />
                         </div>
                         <div className="flex-1 min-w-0">

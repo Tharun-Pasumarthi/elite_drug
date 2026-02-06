@@ -198,7 +198,7 @@ export default function ProductsPage() {
                     })()}
                     alt={product.name}
                     fill
-                    className="object-cover"
+                    className="object-contain p-4"
                   />
                   {product.isPrescription && (
                     <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg">

@@ -142,9 +142,9 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Hover hint */}
+        {/* Hover hint - Desktop only */}
         {!showMagnifier && (
-          <div className="absolute bottom-6 right-6 bg-black/70 backdrop-blur-sm text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 pointer-events-none shadow-lg">
+          <div className="hidden md:flex absolute bottom-6 right-6 bg-black/70 backdrop-blur-sm text-white text-xs px-4 py-2 rounded-full items-center gap-2 pointer-events-none shadow-lg">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
