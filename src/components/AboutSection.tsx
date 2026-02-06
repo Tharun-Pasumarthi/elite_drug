@@ -114,7 +114,7 @@ export default function AboutSection() {
                     
                     {/* Founder Info Badge */}
                     <div className="absolute bottom-8 right-8 bg-gradient-to-br from-orange-500 to-amber-500 text-white px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20">
-                      <p className="text-2xl font-bold mb-1">Ranjit Jayajii</p>
+                      <p className="text-2xl font-bold mb-1">Ranjit Javvaji</p>
                       <p className="text-sm opacity-90">Founder & CEO</p>
                     </div>
                   </div>
@@ -158,7 +158,7 @@ export default function AboutSection() {
                         "From a common man to a successful business leader - a journey built on integrity, quality, and kindness."
                       </p>
                       <p className="text-white/80 text-sm mt-2 font-semibold">
-                        — Ranjit Jayajii, Founder & CEO
+                        — Ranjit Javvaji, Founder & CEO
                       </p>
                     </div>
                   </div>
