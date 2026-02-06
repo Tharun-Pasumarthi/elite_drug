@@ -152,7 +152,7 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: index * 0.05 }}
-          className="bg-transparent rounded-xl overflow-hidden transition-all hover:-translate-y-3 cursor-pointer h-full group"
+          className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 dark:border-slate-700 cursor-pointer h-full group"
         >
           <div className="relative min-h-[180px] max-h-[220px] bg-transparent overflow-hidden">
             <div className="absolute inset-0 p-3">

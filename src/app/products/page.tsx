@@ -172,7 +172,7 @@ export default function ProductsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => handleProductClick(product.slug)}
-                className="bg-transparent rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
+                className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 dark:border-slate-700 group"
               >
                 {/* Product Image */}
                 <div className="relative min-h-[200px] max-h-[240px] bg-transparent overflow-hidden">
