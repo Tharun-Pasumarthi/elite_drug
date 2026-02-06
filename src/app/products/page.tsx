@@ -175,7 +175,7 @@ export default function ProductsPage() {
                 className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 dark:border-slate-700 group"
               >
                 {/* Product Image */}
-                <div className="relative min-h-[200px] max-h-[240px] bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 overflow-hidden">
+                <div className="relative min-h-[200px] max-h-[240px] bg-white/20 dark:bg-slate-900/20 overflow-hidden">
                   <div className="absolute inset-0 p-3">
                     <div className="relative w-full h-full">
                       <Image
@@ -200,7 +200,7 @@ export default function ProductsPage() {
                         })()}
                         alt={product.name}
                         fill
-                        className="object-contain drop-shadow-md"
+                        className="object-contain drop-shadow-sm"
                       />
                     </div>
                   </div>

@@ -104,7 +104,7 @@ export default function RecentlyViewed() {
                 <Link href={`/products/${product.slug}`}>
                   <div className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-slate-700 cursor-pointer h-full">
                     {/* Product Image */}
-                    <div className="relative min-h-[180px] max-h-[200px] bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 overflow-hidden">
+                    <div className="relative min-h-[180px] max-h-[200px] bg-white/20 dark:bg-slate-900/20 overflow-hidden">
                       <div className="absolute inset-0 p-2">
                         <div className="relative w-full h-full">
                           <Image
