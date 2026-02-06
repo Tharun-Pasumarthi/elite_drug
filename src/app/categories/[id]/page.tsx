@@ -140,7 +140,7 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
               width={60} 
               height={60} 
               className="animate-spin"
-              style={{ animationDuration: '3s' }}
+              style={{ animationDuration: '2.5s' }}
             />
             <p className="text-white text-center mt-4 font-semibold">Loading...</p>
           </div>
@@ -294,7 +294,7 @@ export default function CategoryPage() {
               width={60} 
               height={60} 
               className="animate-spin"
-              style={{ animationDuration: '3s' }}
+              style={{ animationDuration: '2.5s' }}
             />
             <p className="text-white text-center mt-4 font-semibold text-lg">Loading Products...</p>
           </div>

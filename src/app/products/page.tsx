@@ -87,7 +87,7 @@ export default function ProductsPage() {
               width={60} 
               height={60} 
               className="animate-spin"
-              style={{ animationDuration: '3s' }}
+              style={{ animationDuration: '2.5s' }}
             />
             <p className="text-gray-900 dark:text-gray-100 text-center mt-4 font-semibold">Loading Products...</p>
           </div>
@@ -104,7 +104,7 @@ export default function ProductsPage() {
               width={60} 
               height={60} 
               className="animate-spin"
-              style={{ animationDuration: '3s' }}
+              style={{ animationDuration: '2.5s' }}
             />
             <p className="text-white dark:text-gray-100 text-center mt-4 font-semibold">Loading...</p>
           </div>

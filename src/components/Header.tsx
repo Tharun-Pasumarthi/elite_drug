@@ -113,14 +113,14 @@ export default function Header() {
       {/* Loading Overlay */}
       {isLoading && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
-          <div className="relative">
+          <div className="flex flex-col items-center justify-center">
             <Image 
               src="/logo.png" 
               alt="Loading" 
               width={60} 
               height={60} 
               className="animate-spin"
-              style={{ animationDuration: '3s' }}
+              style={{ animationDuration: '2.5s' }}
             />
             <p className="text-white text-center mt-4 font-semibold">Loading...</p>
           </div>
@@ -142,7 +142,7 @@ export default function Header() {
             />
             <div className="flex flex-col">
               <span className="text-lg sm:text-xl md:text-2xl font-bold lowercase" style={{ color: '#FF8C00' }}>elite drug</span>
-              <span className="text-[8px] sm:text-[10px] text-black dark:text-white tracking-wide hidden sm:block">enhancing your health</span>
+              <span className="text-[8px] sm:text-[10px] text-black dark:text-white tracking-wide">enhancing your health</span>
             </div>
           </Link>
 
@@ -293,20 +293,23 @@ export default function Header() {
             }
           `}</style>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {/* Mobile Theme Toggle & Menu Button */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button 
+              className="p-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -353,12 +356,6 @@ export default function Header() {
                 </span>
               )}
             </Link>
-            
-            {/* Theme Toggle for Mobile */}
-            <div className="flex items-center gap-2 py-2">
-              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Theme:</span>
-              <ThemeToggle />
-            </div>
             
             {/* Modern Mobile Search */}
             <div className="relative">
