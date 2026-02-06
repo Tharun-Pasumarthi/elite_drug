@@ -73,8 +73,7 @@ export default function AboutSection() {
           >
             <div 
               className="relative w-full h-[600px] perspective-[1000px] cursor-pointer"
-              onMouseEnter={() => setIsFlipped(true)}
-              onMouseLeave={() => setIsFlipped(false)}
+              onClick={() => setIsFlipped(!isFlipped)}
             >
               <motion.div
                 className="relative w-full h-full transition-transform duration-700 transform-style-3d"
@@ -102,11 +101,11 @@ export default function AboutSection() {
                       {/* Gradient overlay at bottom */}
                       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                       
-                      {/* Hover Hint */}
-                      <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                        <div className="opacity-0 hover:opacity-100 transition-all duration-300">
+                      {/* Click Hint */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="opacity-90 transition-all duration-300">
                           <div className="bg-white dark:bg-slate-800 px-4 py-2 rounded-xl shadow-2xl border-2 border-orange-500">
-                            <p className="text-orange-600 dark:text-orange-400 font-bold">Hover to Read Story</p>
+                            <p className="text-orange-600 dark:text-orange-400 font-bold">Click to Read Story</p>
                           </div>
                         </div>
                       </div>
