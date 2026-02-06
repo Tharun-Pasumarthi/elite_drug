@@ -48,109 +48,109 @@ export default function TermsOfService() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">3. Prescription Medications</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">3.1 Valid Prescription Required</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">3.1 Valid Prescription Required</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 Prescription medications require a valid prescription from a licensed healthcare provider. We reserve the right to:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Verify prescriptions with your healthcare provider</li>
                 <li>Refuse to fill prescriptions that appear invalid or fraudulent</li>
                 <li>Limit quantities based on prescription guidelines</li>
                 <li>Request additional documentation as needed</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">3.2 Prescription Transfers</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">3.2 Prescription Transfers</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We may transfer prescriptions to and from other pharmacies as permitted by law and with appropriate authorization.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">3.3 Medication Counseling</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">3.3 Medication Counseling</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Our licensed pharmacists are available to answer questions about your medications. However, our services do not replace professional medical advice, diagnosis, or treatment from your healthcare provider.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Orders and Payments</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">4. Orders and Payments</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">4.1 Order Acceptance</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">4.1 Order Acceptance</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 All orders are subject to acceptance and availability. We reserve the right to refuse or cancel any order for any reason, including but not limited to product availability, errors in pricing or product information, or suspected fraud.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">4.2 Pricing</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">4.2 Pricing</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Prices are subject to change without notice. We strive to provide accurate pricing information, but errors may occur. If we discover an error in pricing, we will notify you and give you the option to cancel your order or pay the correct price.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">4.3 Payment Methods</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">4.3 Payment Methods</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We accept various payment methods as displayed on our website. Payment must be received before order fulfillment. You authorize us to charge your payment method for the total amount of your order, including applicable taxes and shipping fees.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">4.4 Insurance Claims</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">4.4 Insurance Claims</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 If you use insurance, we will submit claims on your behalf. You are responsible for any copayments, deductibles, or amounts not covered by your insurance.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Shipping and Delivery</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">5. Shipping and Delivery</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">5.1 Delivery Times</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">5.1 Delivery Times</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Estimated delivery times are provided in good faith but are not guaranteed. We are not responsible for delays caused by shipping carriers, weather, or other circumstances beyond our control.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">5.2 Shipping Address</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">5.2 Shipping Address</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 You are responsible for providing an accurate shipping address. We may require signature confirmation for controlled substances or high-value orders.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">5.3 Temperature-Sensitive Medications</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">5.3 Temperature-Sensitive Medications</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Some medications require special handling and expedited shipping. Additional fees may apply.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Returns and Refunds</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">6. Returns and Refunds</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">6.1 Return Policy</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">6.1 Return Policy</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 Due to safety and regulatory requirements, we cannot accept returns of:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Prescription medications</li>
                 <li>Opened or used products</li>
                 <li>Temperature-sensitive medications</li>
                 <li>Controlled substances</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">6.2 Damaged or Incorrect Orders</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">6.2 Damaged or Incorrect Orders</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 If you receive a damaged or incorrect order, contact us within 48 hours of delivery. We will arrange for a replacement or refund as appropriate.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">6.3 Refund Processing</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">6.3 Refund Processing</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Approved refunds will be processed to the original payment method within 7-10 business days.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Intellectual Property Rights</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">7. Intellectual Property Rights</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 All content on our website, including text, graphics, logos, images, and software, is the property of Elite Drug or its licensors and is protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works without our express written permission.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Prohibited Uses</h2>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">8. Prohibited Uses</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 You agree not to:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Use our services for any unlawful purpose</li>
                 <li>Provide false or misleading information</li>
                 <li>Submit fraudulent prescriptions</li>
@@ -163,50 +163,50 @@ export default function TermsOfService() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">9. Disclaimer of Warranties</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">9. Disclaimer of Warranties</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 OUR SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT OUR SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE. WE DO NOT WARRANT THE ACCURACY OR COMPLETENESS OF INFORMATION PROVIDED ON OUR WEBSITE.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Limitation of Liability</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">10. Limitation of Liability</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 TO THE MAXIMUM EXTENT PERMITTED BY LAW, ELITE DRUG SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, OR USE, ARISING OUT OF OR IN CONNECTION WITH OUR SERVICES. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT PAID BY YOU FOR THE SPECIFIC PRODUCT OR SERVICE GIVING RISE TO THE CLAIM.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Indemnification</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">11. Indemnification</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 You agree to indemnify, defend, and hold harmless Elite Drug and its officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses arising out of your use of our services, violation of these Terms, or violation of any rights of another party.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">12. Governing Law and Dispute Resolution</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">12. Governing Law and Dispute Resolution</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Elite Drug operates, without regard to conflict of law principles. Any disputes arising from these Terms or your use of our services shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">13. Modifications to Terms</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">13. Modifications to Terms</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We reserve the right to modify these Terms at any time. We will notify you of material changes by posting the updated Terms on our website and updating the "Last Updated" date. Your continued use of our services after such modifications constitutes acceptance of the updated Terms.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">14. Severability</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">14. Severability</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">15. Entire Agreement</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">15. Entire Agreement</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 These Terms, together with our Privacy Policy and any other legal notices published by us, constitute the entire agreement between you and Elite Drug concerning your use of our services.
               </p>
             </section>

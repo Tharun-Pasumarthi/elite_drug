@@ -122,7 +122,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
             >
               <Link
                 href={`/products/${product.slug}`}
-                className="block group bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-[#FF8C00] dark:hover:border-orange-500 hover:-translate-y-2 transform"
+                className="block group bg-transparent rounded-xl transition-all duration-300 overflow-hidden hover:-translate-y-2 transform"
               >
                 {/* Product Image */}
                 <div className="relative min-h-[150px] max-h-[170px] bg-transparent overflow-hidden">

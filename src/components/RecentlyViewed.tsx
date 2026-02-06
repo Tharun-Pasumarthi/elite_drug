@@ -102,7 +102,7 @@ export default function RecentlyViewed() {
                 className="flex-shrink-0 w-64 snap-start"
               >
                 <Link href={`/products/${product.slug}`}>
-                  <div className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-slate-700 cursor-pointer h-full">
+                  <div className="bg-transparent rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 cursor-pointer h-full">
                     {/* Product Image */}
                     <div className="relative min-h-[180px] max-h-[200px] bg-transparent overflow-hidden">
                       <div className="absolute inset-0 p-2">

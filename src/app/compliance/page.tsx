@@ -49,13 +49,13 @@ export default function Compliance() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">3. HIPAA Compliance</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">3. HIPAA Compliance</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">3.1 Health Insurance Portability and Accountability Act</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">3.1 Health Insurance Portability and Accountability Act</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 We are fully compliant with HIPAA regulations to protect your protected health information (PHI):
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Privacy Rule compliance for PHI protection</li>
                 <li>Security Rule implementation for electronic PHI (ePHI)</li>
                 <li>Breach Notification Rule adherence</li>
@@ -64,25 +64,25 @@ export default function Compliance() {
                 <li>Employee training on HIPAA requirements</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-6">3.2 Patient Rights</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-6">3.2 Patient Rights</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Under HIPAA, you have the right to access, amend, and request an accounting of disclosures of your health information. For more details, please see our Privacy Policy.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">4. DEA and Controlled Substances</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">4. DEA and Controlled Substances</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">4.1 DEA Registration</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">4.1 DEA Registration</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Elite Drug maintains current Drug Enforcement Administration (DEA) registration for handling controlled substances. We strictly comply with the Controlled Substances Act (CSA) and applicable state laws.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">4.2 Controlled Substance Protocols</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">4.2 Controlled Substance Protocols</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 Our controlled substance handling includes:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Secure storage and inventory management</li>
                 <li>Detailed record-keeping and reporting</li>
                 <li>Prescription verification and validation</li>
@@ -91,40 +91,40 @@ export default function Compliance() {
                 <li>Theft and loss reporting to DEA</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">4.3 Prescription Drug Monitoring Program (PDMP)</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">4.3 Prescription Drug Monitoring Program (PDMP)</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We participate in state Prescription Drug Monitoring Programs to help prevent prescription drug abuse and diversion.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. State Pharmacy Regulations</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">5. State Pharmacy Regulations</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">5.1 Licensing and Accreditation</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">5.1 Licensing and Accreditation</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 Elite Drug maintains:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Valid pharmacy licenses in all states where we operate</li>
                 <li>Board of Pharmacy compliance in each jurisdiction</li>
                 <li>National Association of Boards of Pharmacy (NABP) accreditation</li>
                 <li>VIPPS (Verified Internet Pharmacy Practice Sites) certification</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">5.2 Professional Standards</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">5.2 Professional Standards</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Our licensed pharmacists adhere to state-specific pharmacy practice acts, continuing education requirements, and professional standards of care.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Quality Assurance and Safety</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">6. Quality Assurance and Safety</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">6.1 Quality Management System</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">6.1 Quality Management System</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 We maintain comprehensive quality assurance programs including:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Standard Operating Procedures (SOPs) for all processes</li>
                 <li>Regular quality audits and inspections</li>
                 <li>Medication error prevention and reporting</li>
@@ -133,20 +133,20 @@ export default function Compliance() {
                 <li>Expiration date management</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">6.2 Patient Safety</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">6.2 Patient Safety</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We implement multiple safety checks including drug interaction screening, allergy alerts, duplicate therapy checks, and dose range verification.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Data Protection and Cybersecurity</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">7. Data Protection and Cybersecurity</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">7.1 Information Security</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">7.1 Information Security</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 We comply with industry-standard cybersecurity frameworks:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>PCI DSS compliance for payment card data</li>
                 <li>NIST Cybersecurity Framework implementation</li>
                 <li>Regular penetration testing and vulnerability assessments</li>
@@ -154,39 +154,39 @@ export default function Compliance() {
                 <li>Employee cybersecurity training</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">7.2 Electronic Prescriptions</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">7.2 Electronic Prescriptions</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We support EPCS (Electronic Prescriptions for Controlled Substances) in compliance with DEA requirements for two-factor authentication and audit trails.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Environmental and Safety Standards</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">8. Environmental and Safety Standards</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">8.1 Environmental Protection</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">8.1 Environmental Protection</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We comply with EPA regulations for pharmaceutical waste disposal and environmental protection, including proper handling of hazardous materials.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">8.2 OSHA Compliance</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">8.2 OSHA Compliance</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We maintain workplace safety standards in accordance with Occupational Safety and Health Administration (OSHA) requirements, including hazard communication, bloodborne pathogens, and emergency preparedness.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">9. Anti-Fraud and Anti-Corruption</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">9. Anti-Fraud and Anti-Corruption</h2>
               
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">9.1 Healthcare Fraud Prevention</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3">9.1 Healthcare Fraud Prevention</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We comply with the False Claims Act, Anti-Kickback Statute, and Stark Law to prevent healthcare fraud and abuse.
               </p>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3 mt-4">9.2 Corporate Integrity</h3>
-              <p className="text-gray-700 leading-relaxed mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 mt-4">9.2 Corporate Integrity</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
                 Our compliance program includes:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
                 <li>Code of Conduct and Ethics</li>
                 <li>Compliance Officer and oversight committee</li>
                 <li>Anonymous reporting hotline</li>
@@ -197,29 +197,29 @@ export default function Compliance() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Accessibility Compliance</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">10. Accessibility Compliance</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Our website and services comply with the Americans with Disabilities Act (ADA) and Web Content Accessibility Guidelines (WCAG) 2.1 Level AA to ensure accessibility for all users.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">11. International Compliance</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">11. International Compliance</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 For international operations, we comply with relevant regulations including GDPR (General Data Protection Regulation) for European customers and local pharmaceutical regulations in each jurisdiction.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">12. Continuous Improvement</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">12. Continuous Improvement</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 We regularly review and update our compliance programs to reflect changes in regulations, industry best practices, and emerging healthcare standards. Our compliance team monitors regulatory developments and implements necessary changes promptly.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">13. Reporting Violations</h2>
-              <p className="text-gray-700 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">13. Reporting Violations</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 If you become aware of any potential compliance violations or have concerns about our practices, please report them immediately to our Compliance Department. We prohibit retaliation against anyone who reports concerns in good faith.
               </p>
             </section>
@@ -237,9 +237,9 @@ export default function Compliance() {
               </div>
             </section>
 
-            <div className="bg-blue-50 rounded-lg p-6 border-l-4 border-blue-500 mt-8">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Certifications & Accreditations</h3>
-              <div className="grid md:grid-cols-2 gap-4 text-gray-700 text-sm">
+            <div className="bg-blue-50 dark:bg-slate-800/50 rounded-lg p-6 border-l-4 border-blue-500 mt-8">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Certifications & Accreditations</h3>
+              <div className="grid md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-300 text-sm">
                 <div>
                   <p className="font-semibold">✓ FDA Registered Facility</p>
                   <p className="font-semibold">✓ DEA Licensed</p>

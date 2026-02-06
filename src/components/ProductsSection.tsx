@@ -36,7 +36,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 cursor-pointer h-full"
+        className="bg-transparent rounded-xl overflow-hidden transition-all hover:-translate-y-3 cursor-pointer h-full"
       >
               <div className="relative min-h-[240px] max-h-[280px] bg-transparent overflow-hidden">
                 <div className="absolute inset-0 p-4">
