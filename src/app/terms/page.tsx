@@ -211,16 +211,16 @@ export default function TermsOfService() {
               </p>
             </section>
 
-            <section className="bg-gray-50 rounded-lg p-6 border-l-4 border-[#FF8C00]">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">16. Contact Information</h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
+            <section className="bg-gray-50 dark:bg-slate-800/50 rounded-lg p-6 border-l-4 border-[#FF8C00]">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">16. Contact Information</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 If you have questions about these Terms of Service, please contact us:
               </p>
-              <div className="space-y-2 text-gray-700">
+              <div className="space-y-2 text-gray-700 dark:text-gray-300">
                 <p><strong>Elite Drug</strong></p>
-                <p>Email: legal@elitedrug.com</p>
-                <p>Phone: +1 (800) 123-4567</p>
-                <p>Address: 123 Healthcare Ave, Medical District, State 12345</p>
+                <p>Email: <a href="mailto:info@elitedrug.com" className="text-orange-600 dark:text-orange-400 hover:underline">info@elitedrug.com</a></p>
+                <p>WhatsApp: <a href="https://wa.me/919182351261" target="_blank" rel="noopener noreferrer" className="text-orange-600 dark:text-orange-400 hover:underline">+91 9182351261</a></p>
+                <p className="text-sm leading-relaxed">Address: #440, 3rd C.K. Nagara, Hosa Road,<br/>Electronic City Post, Bangalore – 560100</p>
               </div>
             </section>
           </div>

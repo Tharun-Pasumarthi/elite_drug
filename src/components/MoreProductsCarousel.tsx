@@ -125,7 +125,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                 className="block group bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-[#FF8C00] dark:hover:border-orange-500 hover:-translate-y-2 transform"
               >
                 {/* Product Image */}
-                <div className="relative min-h-[150px] max-h-[170px] bg-white/20 dark:bg-slate-900/20 overflow-hidden">
+                <div className="relative min-h-[150px] max-h-[170px] bg-transparent overflow-hidden">
                   <div className="absolute inset-0 p-2">
                     <div className="relative w-full h-full">
                       <Image
@@ -138,7 +138,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                         }
                         alt={product.name}
                         fill
-                        className="object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                   </div>

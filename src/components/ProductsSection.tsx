@@ -38,7 +38,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         transition={{ duration: 0.5, delay: index * 0.1 }}
         className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 cursor-pointer h-full"
       >
-              <div className="relative min-h-[240px] max-h-[280px] bg-white/30 dark:bg-slate-900/30 overflow-hidden border-b border-gray-100/50 dark:border-slate-700/30">
+              <div className="relative min-h-[240px] max-h-[280px] bg-transparent overflow-hidden">
                 <div className="absolute inset-0 p-4">
                   <div className="relative w-full h-full">
                     <Image
@@ -51,7 +51,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                       }
                       alt={product.name}
                       fill
-                      className="object-contain drop-shadow-sm"
+                      className="object-contain"
                     />
                   </div>
                 </div>

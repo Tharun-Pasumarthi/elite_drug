@@ -154,7 +154,7 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
           transition={{ duration: 0.4, delay: index * 0.05 }}
           className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 dark:border-slate-700 cursor-pointer h-full group"
         >
-          <div className="relative min-h-[180px] max-h-[220px] bg-white/20 dark:bg-slate-900/20 overflow-hidden">
+          <div className="relative min-h-[180px] max-h-[220px] bg-transparent overflow-hidden">
             <div className="absolute inset-0 p-3">
               <div className="relative w-full h-full">
                 <Image
@@ -167,7 +167,7 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
                   }
                   alt={product.name}
                   fill
-                  className="object-contain drop-shadow-sm"
+                  className="object-contain"
                 />
               </div>
             </div>
