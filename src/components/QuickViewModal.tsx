@@ -107,19 +107,6 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                   {/* Product Name */}
                   <h2 className="text-3xl font-bold text-gray-900">{product.name}</h2>
 
-                  {/* Price */}
-                  <div className="flex items-center gap-3">
-                    <span className="text-4xl font-bold text-gray-900">₹{product.price}</span>
-                    {product.mrp !== product.price && (
-                      <>
-                        <span className="text-xl text-gray-400 line-through">₹{product.mrp}</span>
-                        <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
-                          {Math.round(((product.mrp - product.price) / product.mrp) * 100)}% OFF
-                        </span>
-                      </>
-                    )}
-                  </div>
-
                   {/* Short Description */}
                   <p className="text-gray-600 leading-relaxed">{product.shortDescription}</p>
 

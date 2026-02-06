@@ -225,16 +225,6 @@ export default function ProductsPage() {
                   <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">{product.name}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">{product.shortDescription}</p>
                   
-                  {/* Price */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">₹{product.price}</span>
-                      {product.mrp !== product.price && (
-                        <span className="text-sm text-gray-400 dark:text-gray-500 line-through ml-2">₹{product.mrp}</span>
-                      )}
-                    </div>
-                  </div>
-
                   {/* View Details Button */}
                   <button className="mt-4 w-full bg-[#FF8C00] text-white py-2 rounded-full font-semibold hover:bg-[#FF7C00] transition-colors">
                     View Details

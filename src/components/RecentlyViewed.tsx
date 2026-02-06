@@ -129,15 +129,6 @@ export default function RecentlyViewed() {
                       <div className="text-xs text-[#FF8C00] dark:text-orange-400 font-semibold mb-1">{product.category}</div>
                       <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">{product.name}</h3>
                       
-                      {/* Price */}
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <span className="text-lg font-bold text-gray-900 dark:text-gray-100">₹{product.price}</span>
-                          {product.mrp !== product.price && (
-                            <span className="text-xs text-gray-400 dark:text-gray-500 line-through ml-1">₹{product.mrp}</span>
-                          )}
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </Link>

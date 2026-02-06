@@ -145,20 +145,6 @@ export default function ProductPageClient({ product }: { product: Product }) {
                   {product.name}
                 </motion.h1>
                 
-                {product.price > 0 && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="mb-8"
-                  >
-                    <div className="flex items-baseline gap-2 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-l-4 border-green-500 dark:border-green-600 px-6 py-4 rounded-lg shadow-sm">
-                      <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">MRP:</span>
-                      <span className="text-3xl font-bold text-green-700 dark:text-green-400">₹{product.price.toFixed(2)}</span>
-                    </div>
-                  </motion.div>
-                )}
-
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

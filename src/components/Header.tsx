@@ -255,7 +255,6 @@ export default function Header() {
                             <h4 className="font-semibold text-gray-900 dark:text-gray-100 truncate group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">{product.name}</h4>
                             <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5">{product.category}</p>
                             <div className="flex items-center gap-2 mt-1.5">
-                              <span className="text-sm font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">₹{product.price}</span>
                               <svg className="w-4 h-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24">
                                 <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                               </svg>
@@ -412,7 +411,6 @@ export default function Header() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-semibold text-gray-900 dark:text-gray-100 truncate text-sm group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">{product.name}</h4>
-                          <p className="text-xs font-semibold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">₹{product.price}</p>
                         </div>
                         <svg className="w-4 h-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" fill="none" viewBox="0 0 24 24">
                           <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

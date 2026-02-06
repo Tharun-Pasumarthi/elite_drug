@@ -67,12 +67,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                     </li>
                   ))}
                 </ul>
-                {product.price > 0 && (
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <span className="text-sm text-gray-600">MRP: </span>
-                    <span className="text-2xl font-bold text-green-700">₹{product.price.toFixed(2)}</span>
-                  </div>
-                )}
               </div>
             </motion.div>
     </Link>
