@@ -38,8 +38,8 @@ export default function Footer() {
                   <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2 text-white dark:text-gray-100">Call Us</h3>
-              <a href="tel:+919182351261" className="text-blue-100 dark:text-gray-300 hover:text-white dark:hover:text-orange-400 transition-colors font-medium">
+              <h3 className="text-xl font-bold mb-2 text-white dark:text-gray-100">WhatsApp Us</h3>
+              <a href="https://wa.me/919182351261" target="_blank" rel="noopener noreferrer" className="text-blue-100 dark:text-gray-300 hover:text-white dark:hover:text-orange-400 transition-colors font-medium">
                 +91 9182351261
               </a>
               <p className="text-blue-200 dark:text-gray-400 mt-2 text-sm">Mon-Sat: 9AM - 6PM</p>
@@ -148,8 +148,18 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">Contact</h4>
             <ul className="space-y-3 text-blue-200 dark:text-gray-300 text-sm">
-              <li>Email: info@elitedrug.com</li>
-              <li>Phone: +91 9182351261</li>
+              <li>
+                <span className="text-blue-300 dark:text-gray-400">Email: </span>
+                <a href="mailto:info@elitedrug.com" className="hover:text-white dark:hover:text-orange-400 transition-colors">
+                  info@elitedrug.com
+                </a>
+              </li>
+              <li>
+                <span className="text-blue-300 dark:text-gray-400">WhatsApp: </span>
+                <a href="https://wa.me/919182351261" target="_blank" rel="noopener noreferrer" className="hover:text-white dark:hover:text-orange-400 transition-colors">
+                  +91 9182351261
+                </a>
+              </li>
               <li className="text-xs leading-relaxed mt-3">
                 #440, 3rd C.K. Nagara,<br/>
                 Hosa Road, Electronic City,<br/>

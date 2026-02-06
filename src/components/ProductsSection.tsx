@@ -38,19 +38,23 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         transition={{ duration: 0.5, delay: index * 0.1 }}
         className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 cursor-pointer h-full"
       >
-              <div className="relative h-64 bg-gradient-to-br from-orange-100 to-orange-50 overflow-hidden">
-                <Image
-                  src={
-                    ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
-                      ? (product.images as any).main 
-                      : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
-                        ? (product.images as any).gallery[0]
-                        : '/images/placeholder.svg'
-                  }
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                />
+              <div className="relative min-h-[240px] max-h-[280px] bg-gradient-to-br from-orange-50 via-white to-orange-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 overflow-hidden border-b-2 border-orange-100 dark:border-orange-900/30">
+                <div className="absolute inset-0 p-4">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={
+                        ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                          ? (product.images as any).main 
+                          : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                            ? (product.images as any).gallery[0]
+                            : '/images/placeholder.svg'
+                      }
+                      alt={product.name}
+                      fill
+                      className="object-contain drop-shadow-lg"
+                    />
+                  </div>
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">

@@ -87,12 +87,14 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                               : 'border-gray-200 hover:border-gray-300'
                           }`}
                         >
-                          <Image
-                            src={img}
-                            alt={`${product.name} ${idx + 1}`}
-                            fill
-                            className="object-cover"
-                          />
+                          <div className="relative w-full h-full p-0.5">
+                            <Image
+                              src={img}
+                              alt={`${product.name} ${idx + 1}`}
+                              fill
+                              className="object-contain"
+                            />
+                          </div>
                         </button>
                       ))}
                     </div>

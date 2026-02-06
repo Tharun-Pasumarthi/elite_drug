@@ -104,21 +104,25 @@ export default function RecentlyViewed() {
                 <Link href={`/products/${product.slug}`}>
                   <div className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-slate-700 cursor-pointer h-full">
                     {/* Product Image */}
-                    <div className="relative h-48 bg-gradient-to-br from-orange-100 to-orange-50 overflow-hidden">
-                      <Image
-                        src={
-                          ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
-                            ? (product.images as any).main 
-                            : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
-                              ? (product.images as any).gallery[0]
-                              : '/images/placeholder.svg'
-                        }
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
+                    <div className="relative min-h-[180px] max-h-[200px] bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 overflow-hidden">
+                      <div className="absolute inset-0 p-2">
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={
+                              ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                                ? (product.images as any).main 
+                                : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                                  ? (product.images as any).gallery[0]
+                                  : '/images/placeholder.svg'
+                            }
+                            alt={product.name}
+                            fill
+                            className="object-contain drop-shadow-sm"
+                          />
+                        </div>
+                      </div>
                       {product.isPrescription && (
-                        <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg">
+                        <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg z-10">
                           Rx
                         </div>
                       )}

@@ -190,7 +190,7 @@ export default function HeroSlideshow() {
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="absolute bottom-20 left-6 z-20"
+        className="absolute bottom-32 left-6 z-20"
       >
         <div className="flex items-center gap-4 px-6 py-3 rounded-full backdrop-blur-xl shadow-2xl border bg-white/80 dark:bg-white/5 border-gray-200 dark:border-white/10">
           {stats.map((stat, index) => (

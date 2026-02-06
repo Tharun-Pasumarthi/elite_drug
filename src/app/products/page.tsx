@@ -175,33 +175,37 @@ export default function ProductsPage() {
                 className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 dark:border-slate-700 group"
               >
                 {/* Product Image */}
-                <div className="relative h-48 bg-gradient-to-br from-orange-100 to-orange-50 overflow-hidden">
-                  <Image
-                    src={(() => {
-                      const images = product.images as any;
-                      
-                      // Try main image first
-                      if (images?.main && typeof images.main === 'string' && images.main.trim() !== '') {
-                        return images.main;
-                      }
-                      
-                      // Try first gallery image
-                      if (images?.gallery && Array.isArray(images.gallery) && images.gallery.length > 0) {
-                        const firstGallery = images.gallery[0];
-                        if (firstGallery && typeof firstGallery === 'string' && firstGallery.trim() !== '') {
-                          return firstGallery;
-                        }
-                      }
-                      
-                      // Fallback to placeholder
-                      return '/images/placeholder.svg';
-                    })()}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative min-h-[200px] max-h-[240px] bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 overflow-hidden">
+                  <div className="absolute inset-0 p-3">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={(() => {
+                          const images = product.images as any;
+                          
+                          // Try main image first
+                          if (images?.main && typeof images.main === 'string' && images.main.trim() !== '') {
+                            return images.main;
+                          }
+                          
+                          // Try first gallery image
+                          if (images?.gallery && Array.isArray(images.gallery) && images.gallery.length > 0) {
+                            const firstGallery = images.gallery[0];
+                            if (firstGallery && typeof firstGallery === 'string' && firstGallery.trim() !== '') {
+                              return firstGallery;
+                            }
+                          }
+                          
+                          // Fallback to placeholder
+                          return '/images/placeholder.svg';
+                        })()}
+                        alt={product.name}
+                        fill
+                        className="object-contain drop-shadow-md"
+                      />
+                    </div>
+                  </div>
                   {product.isPrescription && (
-                    <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg">
+                    <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-lg z-10">
                       Rx
                     </div>
                   )}
@@ -213,7 +217,7 @@ export default function ProductsPage() {
                       setQuickViewProduct(product);
                       setIsQuickViewOpen(true);
                     }}
-                    className="absolute top-3 left-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm text-gray-900 dark:text-gray-100 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:bg-white dark:hover:bg-slate-800 transition-all opacity-0 group-hover:opacity-100"
+                    className="absolute top-3 left-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm text-gray-900 dark:text-gray-100 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg hover:bg-white dark:hover:bg-slate-800 transition-all opacity-0 group-hover:opacity-100 z-10"
                   >
                     Quick View
                   </button>

@@ -125,21 +125,25 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                 className="block group bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-[#FF8C00] dark:hover:border-orange-500 hover:-translate-y-2 transform"
               >
                 {/* Product Image */}
-                <div className="relative h-40 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700 dark:to-slate-600 overflow-hidden">
-                  <Image
-                    src={
-                      ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
-                        ? (product.images as any).main 
-                        : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
-                          ? (product.images as any).gallery[0]
-                          : '/images/placeholder.svg'
-                    }
-                    alt={product.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
+                <div className="relative min-h-[150px] max-h-[170px] bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 overflow-hidden">
+                  <div className="absolute inset-0 p-2">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={
+                          ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                            ? (product.images as any).main 
+                            : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                              ? (product.images as any).gallery[0]
+                              : '/images/placeholder.svg'
+                        }
+                        alt={product.name}
+                        fill
+                        className="object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
                   {product.isPrescription && (
-                    <div className="absolute top-2 right-2 bg-gradient-to-br from-red-500 to-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                    <div className="absolute top-2 right-2 bg-gradient-to-br from-red-500 to-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow z-10">
                       Rx
                     </div>
                   )}
