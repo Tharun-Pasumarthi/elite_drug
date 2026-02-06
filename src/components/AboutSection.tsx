@@ -100,15 +100,6 @@ export default function AboutSection() {
                       />
                       {/* Gradient overlay at bottom */}
                       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                      
-                      {/* Click Hint */}
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="opacity-90 transition-all duration-300">
-                          <div className="bg-white dark:bg-slate-800 px-4 py-2 rounded-xl shadow-2xl border-2 border-orange-500">
-                            <p className="text-orange-600 dark:text-orange-400 font-bold">Click to Read Story</p>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     
                     {/* Founder Info Badge */}
