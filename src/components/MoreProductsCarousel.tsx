@@ -16,6 +16,14 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+  const handleSectionClick = (e: React.MouseEvent) => {
+    // Only toggle pause if clicking on the section background, not on products or buttons
+    const target = e.target as HTMLElement;
+    if (!target.closest('a') && !target.closest('button')) {
+      setIsAutoPlaying(!isAutoPlaying);
+    }
+  };
+
   useEffect(() => {
     // Fetch random products
     const fetchProducts = async () => {
@@ -72,24 +80,8 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
       className="py-20 bg-gradient-to-br from-orange-50 via-white to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
-      onTouchStart={() => setIsAutoPlaying(false)}
+      onClick={handleSectionClick}
     >
-      {/* Mobile Pause/Play Button */}
-      <button
-        onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-        className="md:hidden fixed bottom-24 right-4 z-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-        aria-label={isAutoPlaying ? 'Pause carousel' : 'Play carousel'}
-      >
-        {isAutoPlaying ? (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-          </svg>
-        ) : (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        )}
-      </button>
       <div className="container-custom">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-12">

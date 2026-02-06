@@ -121,26 +121,8 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
           setIsPaused(false);
         }}
         onMouseMove={handleMouseMove}
-        onTouchStart={() => setIsPaused(true)}
+        onClick={() => setIsPaused(!isPaused)}
       >
-        {/* Mobile Pause/Play Button */}
-        {validImages.length > 1 && (
-          <button
-            onClick={() => setIsPaused(!isPaused)}
-            className="md:hidden absolute top-4 right-4 z-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-            aria-label={isPaused ? 'Play slideshow' : 'Pause slideshow'}
-          >
-            {isPaused ? (
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            ) : (
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-              </svg>
-            )}
-          </button>
-        )}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}

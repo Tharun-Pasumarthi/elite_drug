@@ -80,7 +80,7 @@ export default function ProductsPage() {
       {/* Initial Fetch Loading */}
       {fetchLoading && (
         <div className="fixed inset-0 bg-white dark:bg-slate-950 z-[100] flex items-center justify-center">
-          <div className="relative">
+          <div className="flex flex-col items-center justify-center">
             <Image 
               src="/logo.png" 
               alt="Loading" 
@@ -97,7 +97,7 @@ export default function ProductsPage() {
       {/* Loading Overlay */}
       {isLoading && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
-          <div className="relative">
+          <div className="flex flex-col items-center justify-center">
             <Image 
               src="/logo.png" 
               alt="Loading" 

@@ -64,24 +64,8 @@ export default function HeroSlideshow() {
       className="relative h-[700px] overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
+      onClick={() => setIsPaused(!isPaused)}
     >
-      {/* Mobile Pause/Play Button */}
-      <button
-        onClick={() => setIsPaused(!isPaused)}
-        className="md:hidden absolute top-4 right-4 z-20 bg-black/50 backdrop-blur-sm text-white p-3 rounded-full hover:bg-black/70 transition-all duration-200"
-        aria-label={isPaused ? 'Play slideshow' : 'Pause slideshow'}
-      >
-        {isPaused ? (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        ) : (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-          </svg>
-        )}
-      </button>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
