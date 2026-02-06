@@ -152,10 +152,10 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: index * 0.05 }}
-          className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 dark:border-slate-700 cursor-pointer h-full group"
+          className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-4 border-2 border-transparent hover:border-orange-400 dark:hover:border-orange-500 cursor-pointer h-full group"
         >
-          <div className="relative min-h-[180px] max-h-[220px] bg-transparent overflow-hidden">
-            <div className="absolute inset-0 p-3">
+          <div className="relative min-h-[180px] max-h-[220px] bg-gradient-to-br from-gray-50/50 to-white dark:from-slate-800/50 dark:to-slate-900/50 overflow-hidden">
+            <div className="absolute inset-0 p-3 group-hover:scale-105 transition-transform duration-500">
               <div className="relative w-full h-full">
                 <Image
                   src={
@@ -167,7 +167,7 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
                   }
                   alt={product.name}
                   fill
-                  className="object-contain"
+                  className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                 />
               </div>
             </div>

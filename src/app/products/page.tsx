@@ -172,11 +172,11 @@ export default function ProductsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => handleProductClick(product.slug)}
-                className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+                className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-orange-400 dark:hover:border-orange-500 group"
               >
                 {/* Product Image */}
-                <div className="relative min-h-[200px] max-h-[240px] bg-transparent overflow-hidden">
-                  <div className="absolute inset-0 p-3">
+                <div className="relative min-h-[200px] max-h-[240px] bg-gradient-to-br from-gray-50/50 to-white dark:from-slate-800/50 dark:to-slate-900/50 overflow-hidden">
+                  <div className="absolute inset-0 p-3 group-hover:scale-105 transition-transform duration-500">
                     <div className="relative w-full h-full">
                       <Image
                         src={(() => {
@@ -200,7 +200,7 @@ export default function ProductsPage() {
                         })()}
                         alt={product.name}
                         fill
-                        className="object-contain"
+                        className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                       />
                     </div>
                   </div>

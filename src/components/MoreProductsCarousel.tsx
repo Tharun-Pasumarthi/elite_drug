@@ -122,11 +122,11 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
             >
               <Link
                 href={`/products/${product.slug}`}
-                className="block group bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-[#FF8C00] dark:hover:border-orange-500 hover:-translate-y-2 transform"
+                className="block group bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-orange-400 dark:hover:border-orange-500 hover:-translate-y-3 transform"
               >
                 {/* Product Image */}
-                <div className="relative min-h-[150px] max-h-[170px] bg-transparent overflow-hidden">
-                  <div className="absolute inset-0 p-2">
+                <div className="relative min-h-[150px] max-h-[170px] bg-gradient-to-br from-gray-50/50 to-white dark:from-slate-800/50 dark:to-slate-900/50 overflow-hidden">
+                  <div className="absolute inset-0 p-2 group-hover:scale-110 transition-transform duration-500">
                     <div className="relative w-full h-full">
                       <Image
                         src={
@@ -138,7 +138,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                         }
                         alt={product.name}
                         fill
-                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                        className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                       />
                     </div>
                   </div>

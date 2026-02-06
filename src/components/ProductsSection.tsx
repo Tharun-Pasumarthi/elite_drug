@@ -36,10 +36,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-3 border border-gray-100 cursor-pointer h-full"
+        className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-4 border-2 border-transparent hover:border-orange-400 dark:hover:border-orange-500 cursor-pointer h-full group"
       >
-              <div className="relative min-h-[240px] max-h-[280px] bg-transparent overflow-hidden">
-                <div className="absolute inset-0 p-4">
+              <div className="relative min-h-[240px] max-h-[280px] bg-gradient-to-br from-gray-50/50 to-white dark:from-slate-800/50 dark:to-slate-900/50 overflow-hidden">
+                <div className="absolute inset-0 p-4 group-hover:scale-105 transition-transform duration-500">
                   <div className="relative w-full h-full">
                     <Image
                       src={
@@ -51,13 +51,13 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                       }
                       alt={product.name}
                       fill
-                      className="object-contain"
+                      className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                     />
                   </div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300">
                   {product.name}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed">

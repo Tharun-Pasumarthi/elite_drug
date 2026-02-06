@@ -102,10 +102,10 @@ export default function RecentlyViewed() {
                 className="flex-shrink-0 w-64 snap-start"
               >
                 <Link href={`/products/${product.slug}`}>
-                  <div className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-slate-700 cursor-pointer h-full">
+                  <div className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-3 border-2 border-transparent hover:border-orange-400 dark:hover:border-orange-500 cursor-pointer h-full group">
                     {/* Product Image */}
-                    <div className="relative min-h-[180px] max-h-[200px] bg-transparent overflow-hidden">
-                      <div className="absolute inset-0 p-2">
+                    <div className="relative min-h-[180px] max-h-[200px] bg-gradient-to-br from-gray-50/50 to-white dark:from-slate-800/50 dark:to-slate-900/50 overflow-hidden">
+                      <div className="absolute inset-0 p-2 group-hover:scale-110 transition-transform duration-500">
                         <div className="relative w-full h-full">
                           <Image
                             src={
@@ -117,7 +117,7 @@ export default function RecentlyViewed() {
                             }
                             alt={product.name}
                             fill
-                            className="object-contain"
+                            className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                           />
                         </div>
                       </div>
