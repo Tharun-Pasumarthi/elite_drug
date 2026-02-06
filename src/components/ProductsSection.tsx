@@ -49,7 +49,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                   }
                   alt={product.name}
                   fill
-                  className="object-contain p-4"
+                  className="object-cover"
                 />
               </div>
               <div className="p-6">

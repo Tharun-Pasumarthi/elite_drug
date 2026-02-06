@@ -91,7 +91,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                             src={img}
                             alt={`${product.name} ${idx + 1}`}
                             fill
-                            className="object-contain p-1"
+                            className="object-cover"
                           />
                         </button>
                       ))}

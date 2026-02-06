@@ -136,7 +136,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                     }
                     alt={product.name}
                     fill
-                    className="object-contain p-3 group-hover:scale-110 transition-transform duration-300"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   {product.isPrescription && (
                     <div className="absolute top-2 right-2 bg-gradient-to-br from-red-500 to-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow">
