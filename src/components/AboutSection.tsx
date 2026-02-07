@@ -121,7 +121,8 @@ export default function AboutSection() {
         </div>
 
         {/* Founder Image and Timeline Grid */}
-        <div className="grid md:grid-cols-2 gap-y-16 md:gap-12 items-start mb-24">\n          {/* Left: Founder Flip Card */}
+        <div className="grid md:grid-cols-2 gap-y-16 md:gap-12 items-start mb-24">
+          {/* Left: Founder Flip Card */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
