@@ -314,6 +314,79 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <nav className="md:hidden pb-4 flex flex-col gap-4">
+            {/* Mobile Search Bar */}
+            <form onSubmit={handleSearch} className="w-full">
+              <div ref={searchRef} className="relative w-full">
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setShowSuggestions(true);
+                    }}
+                    placeholder="Search products..."
+                    className="w-full px-4 py-2.5 pr-11 rounded-xl border-0 bg-gradient-to-r from-gray-50 to-white dark:from-slate-800 dark:to-slate-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 shadow-md focus:shadow-lg focus:shadow-orange-100 dark:focus:shadow-orange-900/30 transition-all duration-300 outline-none ring-2 ring-transparent focus:ring-orange-400/50 dark:focus:ring-orange-500/50"
+                    onFocus={() => { 
+                      if (searchQuery) setShowSuggestions(true);
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Mobile Search Suggestions Dropdown */}
+                {showSuggestions && searchQuery && (
+                  <div className="absolute top-full mt-2 w-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-100 dark:border-slate-700 max-h-72 overflow-hidden z-50">
+                    {filteredProducts.length > 0 ? (
+                      <div className="py-1 overflow-y-auto max-h-72">
+                        {filteredProducts.slice(0, 5).map((product, idx) => (
+                          <button
+                            key={product.id}
+                            type="button"
+                            onClick={() => {
+                              handleProductClick(product.slug);
+                              setIsMenuOpen(false);
+                            }}
+                            className="w-full px-3 py-2 flex items-start gap-2 text-left transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100/50 dark:hover:from-orange-900/20 dark:hover:to-orange-800/20"
+                          >
+                            <div className="relative w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30">
+                              <Image
+                                src={
+                                  ((product.images as any)?.main && typeof (product.images as any).main === 'string' && (product.images as any).main.trim() !== '') 
+                                    ? (product.images as any).main 
+                                    : ((product.images as any)?.gallery?.[0] && typeof (product.images as any).gallery[0] === 'string' && (product.images as any).gallery[0].trim() !== '')
+                                      ? (product.images as any).gallery[0]
+                                      : '/images/placeholder.svg'
+                                }
+                                alt={product.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">{product.name}</h4>
+                              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{product.category}</p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="px-3 py-6 text-center text-gray-500 dark:text-gray-400">
+                        <p className="text-sm font-medium">No products found</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </form>
+            
             <Link 
               href="/" 
               className="relative text-gray-700 dark:text-gray-300 font-medium pb-1 border-b-2 border-transparent hover:border-[#FF8C00] dark:hover:border-orange-500 transition-all" 

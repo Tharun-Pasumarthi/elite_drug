@@ -121,8 +121,7 @@ export default function AboutSection() {
         </div>
 
         {/* Founder Image and Timeline Grid */}
-        <div className="grid md:grid-cols-2 gap-12 items-start mb-24">
-          {/* Left: Founder Flip Card */}
+        <div className="grid md:grid-cols-2 gap-y-16 md:gap-12 items-start mb-24">\n          {/* Left: Founder Flip Card */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -152,6 +151,13 @@ export default function AboutSection() {
                   
                   {/* Image container */}
                   <div className="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-2xl hover:shadow-orange-500/30 hover:shadow-[0_20px_70px_-10px] transition-all duration-500 h-full">
+                    {/* Mobile Tap Hint - Only visible on mobile */}
+                    {isMobile && !isFlipped && (
+                      <div className="absolute top-6 left-6 bg-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg animate-pulse z-20">
+                        👆 Tap to read story
+                      </div>
+                    )}
+                    
                     <div className="relative h-[500px] rounded-2xl overflow-hidden">
                       <Image
                         src="/images/founder.jpg"
@@ -172,11 +178,11 @@ export default function AboutSection() {
                   </div>
 
                   {/* Founder Title Below Image */}
-                  <div className="mt-6 text-center">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  <div className="mt-6 text-center mb-8">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                       Founder of Elite Drug Pharma
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 italic">
+                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 italic">
                       "Committed to making quality healthcare accessible to all"
                     </p>
                   </div>

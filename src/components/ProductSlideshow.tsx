@@ -14,7 +14,18 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
   const [magnifierPos, setMagnifierPos] = useState({ x: 0, y: 0 });
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
+  
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Filter out empty images
   const validImages = images.filter(img => img && typeof img === 'string' && img.trim() !== '');
@@ -111,14 +122,18 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
       {/* Main Image with Professional Magnifier */}
       <div 
         ref={imageRef}
-        className="relative h-[500px] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl border border-gray-200 cursor-crosshair"
+        className="relative h-[500px] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden shadow-xl border border-gray-200 cursor-default md:cursor-crosshair"
         onMouseEnter={() => {
-          setShowMagnifier(true);
-          setIsPaused(true);
+          if (!isMobile) {
+            setShowMagnifier(true);
+            setIsPaused(true);
+          }
         }}
         onMouseLeave={() => {
-          setShowMagnifier(false);
-          setIsPaused(false);
+          if (!isMobile) {
+            setShowMagnifier(false);
+            setIsPaused(false);
+          }
         }}
         onMouseMove={handleMouseMove}
         onClick={() => setIsPaused(!isPaused)}
@@ -180,9 +195,9 @@ export default function ProductSlideshow({ images }: ProductSlideshowProps) {
         )}
       </div>
 
-      {/* Professional Magnifier Box */}
+      {/* Professional Magnifier Box - Desktop Only */}
       <AnimatePresence>
-        {showMagnifier && (
+        {showMagnifier && !isMobile && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
