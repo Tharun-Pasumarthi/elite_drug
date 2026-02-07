@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 const milestones = [
@@ -31,6 +31,65 @@ Strategically, the focus remained on Quality-First Practices, Relationship-Drive
 
 export default function AboutSection() {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Auto-close timer for mobile (7 seconds)
+  useEffect(() => {
+    if (isMobile && isFlipped) {
+      timerRef.current = setTimeout(() => {
+        setIsFlipped(false);
+      }, 7000);
+    }
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [isFlipped, isMobile]);
+
+  // Handle click outside for mobile
+  useEffect(() => {
+    if (!isMobile || !isFlipped) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        setIsFlipped(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isFlipped, isMobile]);
+
+  const handleDesktopHover = () => {
+    if (!isMobile) {
+      setIsFlipped(true);
+    }
+  };
+
+  const handleDesktopLeave = () => {
+    if (!isMobile) {
+      setIsFlipped(false);
+    }
+  };
+
+  const handleMobileClick = () => {
+    if (isMobile) {
+      setIsFlipped(!isFlipped);
+    }
+  };
   
   return (
     <section id="about" className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 relative overflow-hidden">
@@ -72,8 +131,11 @@ export default function AboutSection() {
             className="relative"
           >
             <div 
+              ref={cardRef}
               className="relative w-full h-[600px] perspective-[1000px] cursor-pointer"
-              onClick={() => setIsFlipped(!isFlipped)}
+              onMouseEnter={handleDesktopHover}
+              onMouseLeave={handleDesktopLeave}
+              onClick={handleMobileClick}
             >
               <motion.div
                 className="relative w-full h-full transition-transform duration-700 transform-style-3d"

@@ -88,7 +88,7 @@ export async function generateMetadata({
   }
 
   const productImage = (product.images as any)?.main || (product.images as any)?.gallery?.[0] || '/logo.png';
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://elite-drug.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://elitedrug.org';
   
   // Ensure image URL is absolute for proper embedding
   const absoluteImageUrl = productImage.startsWith('http') 
