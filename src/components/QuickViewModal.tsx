@@ -112,6 +112,12 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                   {/* Short Description */}
                   <p className="text-gray-600 leading-relaxed">{product.shortDescription}</p>
 
+                  {/* Price Display */}
+                  <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border-2 border-orange-200 shadow-lg">
+                    <p className="text-sm text-gray-600 mb-1">MRP</p>
+                    <p className="text-4xl font-black text-orange-600">₹{product.price}</p>
+                  </div>
+
                   {/* Key Info */}
                   <div className="grid grid-cols-2 gap-4 py-4 border-t border-b border-gray-200">
                     {product.composition && (

@@ -196,6 +196,13 @@ function ProductCard({ product, index, onQuickView }: { product: Product; index:
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
               {product.shortDescription}
             </p>
+            
+            {/* Price Display */}
+            <div className="mb-4 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-3 border border-orange-200 dark:border-orange-800">
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">MRP</p>
+              <p className="text-xl font-black text-orange-600 dark:text-orange-400">₹{product.price}</p>
+            </div>
+            
             <div className="flex items-center justify-between mb-4">
               {product.isPrescription && (
                 <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-xs font-semibold">

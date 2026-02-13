@@ -158,6 +158,12 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                     {product.shortDescription}
                   </p>
                   
+                  {/* Price Display */}
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-2 border border-orange-200 dark:border-orange-808 mb-2">
+                    <p className="text-[10px] text-gray-600 dark:text-gray-400 mb-1">MRP</p>
+                    <p className="text-base font-black text-orange-600 dark:text-orange-400">₹{product.price}</p>
+                  </div>
+                  
                   {/* Category Badge */}
                   {product.category && (
                     <span className="inline-block px-2 py-1 bg-gradient-to-r from-orange-100 to-purple-100 dark:from-orange-900/30 dark:to-purple-900/30 text-gray-800 dark:text-gray-300 text-[10px] font-semibold rounded-full">

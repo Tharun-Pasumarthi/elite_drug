@@ -198,6 +198,17 @@ export default function ProductPageClient({ product }: { product: Product }) {
                   )}
                 </motion.div>
 
+                {/* Price Display */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="mt-6 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-6 border-2 border-orange-200 dark:border-orange-800 shadow-lg"
+                >
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">MRP</p>
+                  <p className="text-4xl font-black text-orange-600 dark:text-orange-400">₹{product.price}</p>
+                </motion.div>
+
                 {/* Share Buttons */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

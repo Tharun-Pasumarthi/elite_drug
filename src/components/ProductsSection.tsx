@@ -60,12 +60,17 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300">
                   {product.name}
                 </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
                   {product.shortDescription}
                 </p>
+                
+                {/* Price Display */}
+                <div className="mb-4 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">MRP</p>
+                    <p className="text-2xl font-black text-orange-600 dark:text-orange-400">₹{product.price}</p>
                 <ul className="space-y-2 mb-4">
                   {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-gray-600">
+                    <li key={idx} className="flex items-start gap-2 text-gray-600 dark:text-gray-400">
                       <span className="text-primary mt-1">✓</span>
                       <span>{feature}</span>
                     </li>

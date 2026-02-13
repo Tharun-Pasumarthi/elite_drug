@@ -133,6 +133,11 @@ export default function RecentlyViewed() {
                       <div className="text-xs text-[#FF8C00] dark:text-orange-400 font-semibold mb-1">{product.category}</div>
                       <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">{product.name}</h3>
                       
+                      {/* Price Display */}
+                      <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-2 border border-orange-200 dark:border-orange-800">
+                        <p className="text-[10px] text-gray-600 dark:text-gray-400 mb-1">MRP</p>
+                        <p className="text-lg font-black text-orange-600 dark:text-orange-400">₹{product.price}</p>
+                      </div>
                     </div>
                   </div>
                 </Link>
