@@ -197,26 +197,26 @@ export default function AboutSection() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <div className="relative bg-gradient-to-br from-orange-500 to-amber-500 dark:from-orange-600 dark:to-amber-600 rounded-3xl p-8 shadow-2xl h-full overflow-y-auto">
+                  <div className="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl h-full overflow-y-auto border-2 border-orange-200 dark:border-orange-800">
                     <div className="flex items-center gap-3 mb-6">
                       <span className="text-4xl">📖</span>
-                      <h3 className="text-3xl font-bold text-white">
+                      <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                         Our Story
                       </h3>
                     </div>
                     
-                    <div className="prose prose-lg prose-invert max-w-none">
-                      <p className="text-white leading-relaxed text-justify whitespace-pre-line">
+                    <div className="prose prose-lg dark:prose-invert max-w-none">
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify whitespace-pre-line">
                         {founderStory}
                       </p>
                     </div>
 
                     {/* Decorative Quote */}
-                    <div className="mt-6 border-l-4 border-white/50 pl-6 py-4 bg-white/10 rounded-r-xl backdrop-blur-sm">
-                      <p className="text-white italic font-medium">
+                    <div className="mt-6 border-l-4 border-orange-500 dark:border-orange-400 pl-6 py-4 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-r-xl">
+                      <p className="text-gray-900 dark:text-gray-100 italic font-medium">
                         "From a common man to a successful business leader - a journey built on integrity, quality, and kindness."
                       </p>
-                      <p className="text-white/80 text-sm mt-2 font-semibold">
+                      <p className="text-gray-700 dark:text-gray-300 text-sm mt-2 font-semibold">
                         — Ranjit Javvaji, Founder & CEO
                       </p>
                     </div>
