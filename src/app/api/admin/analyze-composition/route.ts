@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getGrokApiConfig, getNextGrokApiKey } from '@/lib/grokRoundRobin';
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,19 +22,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const apiKey = process.env.PERPLEXITY_API_KEY;
-    if (!apiKey) {
-      console.error('❌ PERPLEXITY_API_KEY not found in environment variables');
+    const grokKeySelection = getNextGrokApiKey();
+    if (!grokKeySelection) {
+      console.error('❌ No Grok API keys found in environment variables');
       return NextResponse.json(
-        { error: 'Perplexity API key not configured' },
+        { error: 'Grok API keys not configured' },
         { status: 500 }
       );
     }
 
-    console.log('✅ API Key found:', apiKey.substring(0, 10) + '...');
+    const apiKey = grokKeySelection.key;
+    const { apiUrl, model, provider } = getGrokApiConfig(apiKey);
+
+    console.log(
+      `✅ Grok key selected: ${grokKeySelection.index + 1}/${grokKeySelection.total}`
+    );
+    console.log('🧭 AI provider:', provider);
+    console.log('🌐 API URL:', apiUrl);
     console.log('🔍 Analyzing composition for:', actualProductName);
     console.log('📋 Composition:', composition);
-    console.log('🤖 Using model: sonar-pro');
+    console.log('🤖 Using model:', model);
     console.log('📊 Max tokens: 3500');
 
     const prompt = `You are a senior pharmaceutical consultant. Analyze this medicine and provide detailed information.
@@ -100,14 +108,14 @@ CRITICAL: Return ONLY the JSON object. Start with { and end with }. NO code bloc
     const timeout = setTimeout(() => controller.abort(), 60000); // 60 second timeout
 
     try {
-      const response = await fetch('https://api.perplexity.ai/chat/completions', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'sonar-pro',
+          model,
           messages: [
             {
               role: 'system',
@@ -126,13 +134,11 @@ CRITICAL: Return ONLY the JSON object. Start with { and end with }. NO code bloc
       
       clearTimeout(timeout);
 
-      clearTimeout(timeout);
-
       console.log('📡 API Response Status:', response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ Perplexity API Error:', {
+        console.error('❌ Grok API Error:', {
           status: response.status,
           statusText: response.statusText,
           error: errorText,
@@ -140,7 +146,7 @@ CRITICAL: Return ONLY the JSON object. Start with { and end with }. NO code bloc
           composition: composition
         });
         
-        let errorMessage = 'Perplexity API request failed';
+        let errorMessage = 'Grok API request failed';
         let errorDetails = `Status: ${response.status} - ${response.statusText}`;
         
         try {
@@ -295,7 +301,7 @@ CRITICAL: Return ONLY the JSON object. Start with { and end with }. NO code bloc
     }
 
   } catch (error: any) {
-    console.error('❌ Perplexity AI Error:', {
+    console.error('❌ Grok AI Error:', {
       message: error.message,
       stack: error.stack,
       cause: error.cause

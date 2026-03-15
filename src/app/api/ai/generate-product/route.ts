@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// Perplexity AI Configuration
-const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY;
-const PERPLEXITY_API_URL = 'https://api.perplexity.ai/chat/completions';
+import { getGrokApiConfig, getNextGrokApiKey } from '@/lib/grokRoundRobin';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,16 +12,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Use Perplexity AI if API key is available, otherwise use simulation
+    // Use Grok AI if API keys are available, otherwise use simulation
     let generatedData;
-    
-    console.log('🔍 Checking Perplexity API Key:', PERPLEXITY_API_KEY ? '✅ Found' : '❌ Not Found');
-    
-    if (PERPLEXITY_API_KEY) {
-      console.log('🤖 Using Perplexity AI with web search for:', name);
-      generatedData = await generateWithPerplexity(name, composition);
+
+    const grokKeySelection = getNextGrokApiKey();
+    console.log('🔍 Checking Grok API Keys:', grokKeySelection ? '✅ Found' : '❌ Not Found');
+
+    if (grokKeySelection) {
+      console.log(
+        `🤖 Using Grok AI for: ${name} (key ${grokKeySelection.index + 1}/${grokKeySelection.total})`
+      );
+      generatedData = await generateWithGrok(name, composition, grokKeySelection.key);
     } else {
-      console.warn('⚠️  PERPLEXITY_API_KEY not found. Using simulated generation. Add your API key to .env.local for real AI-powered search.');
+      console.warn(
+        '⚠️  GROK_API_KEYS not found. Using simulated generation. Add your Grok keys to .env.local for real AI-powered search.'
+      );
       generatedData = await simulateAIGeneration(name, composition);
     }
 
@@ -37,7 +39,9 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function generateWithPerplexity(name: string, composition: string) {
+async function generateWithGrok(name: string, composition: string, apiKey: string) {
+  const { apiUrl, model } = getGrokApiConfig(apiKey);
+
   const prompt = `You are a pharmaceutical expert. Research and provide comprehensive information about this medication in simple, easy-to-understand language for general patients (not medical professionals).
 
 Product Name: ${name}
@@ -106,14 +110,14 @@ CRITICAL INSTRUCTIONS:
 - Make it conversational and friendly
 - Focus on what patients need to know`;
 
-  const response = await fetch(PERPLEXITY_API_URL, {
+  const response = await fetch(apiUrl, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${PERPLEXITY_API_KEY}`,
+      'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'sonar-pro',
+      model,
       messages: [
         {
           role: 'system',
@@ -131,18 +135,18 @@ CRITICAL INSTRUCTIONS:
 
   if (!response.ok) {
     const error = await response.text();
-    console.error('Perplexity API error:', error);
-    throw new Error(`Perplexity API failed: ${response.status}`);
+    console.error('Grok API error:', error);
+    throw new Error(`Grok API failed: ${response.status}`);
   }
 
   const data = await response.json();
   const content = data.choices[0].message.content;
 
-  // Extract JSON from response (Perplexity might wrap it in markdown)
+  // Extract JSON from response in case model wraps it in markdown.
   const jsonMatch = content.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
-    console.error('No JSON found in Perplexity response:', content);
-    throw new Error('Invalid response format from Perplexity');
+    console.error('No JSON found in Grok response:', content);
+    throw new Error('Invalid response format from Grok');
   }
 
   const generatedData = JSON.parse(jsonMatch[0]);

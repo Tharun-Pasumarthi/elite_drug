@@ -86,7 +86,18 @@ export default function AddProductPage() {
         }));
         alert('✨ AI analysis complete!');
       } else {
-        const errorData = await response.json().catch(() => ({}));
+        const rawError = await response.text();
+        let errorData: { error?: string; details?: string } = {};
+
+        try {
+          errorData = JSON.parse(rawError);
+        } catch {
+          errorData = {
+            error: 'Request failed',
+            details: rawError || `Status ${response.status}: ${response.statusText}`,
+          };
+        }
+
         console.error('AI analysis failed:', errorData);
         alert(`AI analysis failed: ${errorData.error || 'Unknown error'}\n${errorData.details || ''}`);
       }
