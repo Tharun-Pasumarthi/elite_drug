@@ -24,7 +24,7 @@ export default function RecentlyViewed() {
         }
 
         // Fetch products from API
-        const response = await fetch('/api/products');
+        const response = await fetch('/api/products', { cache: 'force-cache' });
         if (response.ok) {
           const allProducts = await response.json();
           
@@ -117,6 +117,7 @@ export default function RecentlyViewed() {
                             }
                             alt={product.name}
                             fill
+                            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, 50vw"
                             className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                           />
                         </div>

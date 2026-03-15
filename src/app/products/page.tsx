@@ -16,8 +16,6 @@ import { useRouter } from 'next/navigation';
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadingProduct, setLoadingProduct] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
@@ -28,7 +26,7 @@ export default function ProductsPage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch('/api/products', { cache: 'force-cache' });
         if (response.ok) {
           const data = await response.json();
           setProducts(data);
@@ -53,14 +51,6 @@ export default function ProductsPage() {
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-
-  const handleProductClick = (slug: string) => {
-    setLoadingProduct(slug);
-    setIsLoading(true);
-    setTimeout(() => {
-      router.push(`/products/${slug}`);
-    }, 300);
-  };
 
   return (
     <>
@@ -94,23 +84,6 @@ export default function ProductsPage() {
         </div>
       )}
       
-      {/* Loading Overlay */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center">
-            <Image 
-              src="/logo.png" 
-              alt="Loading" 
-              width={60} 
-              height={60} 
-              className="animate-spin"
-              style={{ animationDuration: '2.5s' }}
-            />
-            <p className="text-white dark:text-gray-100 text-center mt-4 font-semibold">Loading...</p>
-          </div>
-        </div>
-      )}
-
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 py-12">
         <div className="container mx-auto px-6">
           {/* Header */}
@@ -171,7 +144,7 @@ export default function ProductsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                onClick={() => handleProductClick(product.slug)}
+                onClick={() => router.push(`/products/${product.slug}`)}
                 className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-500 hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-orange-400 dark:hover:border-orange-500 group"
               >
                 {/* Product Image */}
@@ -200,6 +173,7 @@ export default function ProductsPage() {
                         })()}
                         alt={product.name}
                         fill
+                        sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                         className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                       />
                     </div>

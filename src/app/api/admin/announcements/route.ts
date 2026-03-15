@@ -61,10 +61,6 @@ export async function POST(request: NextRequest) {
       console.error('Error creating announcement:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
-    // Revalidate pages that show announcements
-    revalidatePath('/');
-    revalidatePath('/announcements');
-    // Revalidate pages that show announcements
     revalidatePath('/');
     revalidatePath('/announcements');
 
@@ -140,6 +136,9 @@ export async function DELETE(request: NextRequest) {
       console.error('Error deleting announcement:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
+
+    revalidatePath('/');
+    revalidatePath('/announcements');
 
     return NextResponse.json({ message: 'Announcement deleted successfully' });
   } catch (error: any) {

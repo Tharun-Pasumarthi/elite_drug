@@ -1,10 +1,12 @@
+import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSlideshow from '@/components/HeroSlideshow';
-import AboutSection from '@/components/AboutSection';
-import CategorySection from '@/components/CategorySection';
-import RecentlyViewed from '@/components/RecentlyViewed';
-import ScrollToTop from '@/components/ScrollToTop';
+
+const AboutSection = dynamic(() => import('@/components/AboutSection'));
+const CategorySection = dynamic(() => import('@/components/CategorySection'));
+const RecentlyViewed = dynamic(() => import('@/components/RecentlyViewed'));
+const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'));
 
 export default function Home() {
   return (

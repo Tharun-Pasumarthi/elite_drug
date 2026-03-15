@@ -22,7 +22,7 @@ export default function Header() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch('/api/products', { cache: 'force-cache' });
         if (response.ok) {
           const data = await response.json();
           setProducts(data);
@@ -38,7 +38,7 @@ export default function Header() {
   useEffect(() => {
     async function fetchAnnouncementCount() {
       try {
-        const response = await fetch('/api/announcements');
+        const response = await fetch('/api/announcements', { cache: 'force-cache' });
         if (response.ok) {
           const data = await response.json();
           setAnnouncementCount(data.announcements?.length || 0);
@@ -248,6 +248,7 @@ export default function Header() {
                               }
                               alt={product.name}
                               fill
+                              sizes="56px"
                               className="object-cover"
                             />
                           </div>
@@ -367,6 +368,7 @@ export default function Header() {
                                 }
                                 alt={product.name}
                                 fill
+                                sizes="48px"
                                 className="object-cover"
                               />
                             </div>

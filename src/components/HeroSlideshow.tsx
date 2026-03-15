@@ -173,8 +173,10 @@ export default function HeroSlideshow() {
                     src={slides[currentSlide].image}
                     alt={slides[currentSlide].title}
                     fill
+                    sizes="(min-width: 1024px) 42vw, (min-width: 768px) 48vw, 100vw"
+                    quality={80}
                     className="object-cover"
-                    priority
+                    priority={currentSlide === 0}
                   />
                   {/* Glowing border effect */}
                   <div className="absolute inset-0 rounded-3xl ring-2 ring-orange-500/30 ring-offset-4 ring-offset-transparent" />

@@ -10,27 +10,9 @@ import { useRef, useState, useEffect } from 'react';
 function ProductCard({ product, index }: { product: Product; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <>
-      {isLoading && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center">
-            <Image 
-              src="/logo.png" 
-              alt="Loading" 
-              width={60} 
-              height={60} 
-              className="animate-spin"
-              style={{ animationDuration: '2.5s' }}
-            />
-            <p className="text-white text-center mt-4 font-semibold">Loading...</p>
-          </div>
-        </div>
-      )}
-      
-      <Link href={`/products/${product.slug}`} onClick={() => setIsLoading(true)}>
+      <Link href={`/products/${product.slug}`}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -51,6 +33,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                       }
                       alt={product.name}
                       fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                     />
                   </div>
@@ -81,7 +64,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               </div>
             </motion.div>
     </Link>
-    </>
   );
 }
 
@@ -93,7 +75,7 @@ export default function ProductsSection() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch('/api/products', { cache: 'force-cache' });
         if (response.ok) {
           const data = await response.json();
           setProducts(data);

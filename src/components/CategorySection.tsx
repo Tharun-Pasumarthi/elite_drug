@@ -1,11 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import { 
   Activity, 
   Heart, 
@@ -114,80 +112,44 @@ const categories: Category[] = [
 function CategoryCard({ category, index }: { category: Category; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      router.push(`/categories/${category.id}`);
-    }, 300);
-  };
 
   return (
-    <>
-      {/* Loading Overlay for this card */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center">
-            <Image 
-              src="/logo.png" 
-              alt="Loading" 
-              width={60} 
-              height={60} 
-              className="animate-spin"
-              style={{ animationDuration: '2.5s' }}
-            />
-            <p className="text-white dark:text-gray-100 text-center mt-4 font-semibold">Loading...</p>
-          </div>
-        </div>
-      )}
-
-      <div onClick={handleClick} className="cursor-pointer">
+      <Link href={`/categories/${category.id}`} className="block">
         <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.5, delay: index * 0.05 }}
-        className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-slate-700 cursor-pointer h-full"
-      >
-        {/* Gradient Background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-        
-        {/* Content */}
-        <div className="relative p-6 flex flex-col items-center text-center h-full">
-          {/* Icon */}
-          <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-            <category.icon className="w-10 h-10 text-white" strokeWidth={1.5} />
-          </div>
-          
-          {/* Category Name */}
-          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-[#FF8C00] dark:group-hover:text-orange-400 transition-colors">
-            {category.name}
-          </h3>
-          
-          {/* Description */}
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow">
-            {category.description}
-          </p>
-          
-          {/* Product Count Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-slate-700 rounded-full text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:bg-[#FF8C00] dark:group-hover:bg-orange-600 group-hover:text-white transition-colors">
-            <span>{category.productCount}</span>
-            <span>Products</span>
-          </div>
-        </div>
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.5, delay: index * 0.05 }}
+          className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-slate-700 cursor-pointer h-full"
+        >
+          <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
 
-        {/* Arrow Icon */}
-        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white dark:bg-slate-700 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-          <svg className="w-4 h-4 text-[#FF8C00] dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-      </motion.div>
-    </div>
-    </>
+          <div className="relative p-6 flex flex-col items-center text-center h-full">
+            <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+              <category.icon className="w-10 h-10 text-white" strokeWidth={1.5} />
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-[#FF8C00] dark:group-hover:text-orange-400 transition-colors">
+              {category.name}
+            </h3>
+
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow">
+              {category.description}
+            </p>
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-slate-700 rounded-full text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:bg-[#FF8C00] dark:group-hover:bg-orange-600 group-hover:text-white transition-colors">
+              <span>{category.productCount}</span>
+              <span>Products</span>
+            </div>
+          </div>
+
+          <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white dark:bg-slate-700 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg className="w-4 h-4 text-[#FF8C00] dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </motion.div>
+      </Link>
   );
 }
 

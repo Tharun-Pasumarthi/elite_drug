@@ -1,32 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { timingSafeEqual } from 'node:crypto';
 import { sign } from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-
-// Hashed password for 'EliteDrug@2026'
-// Generated with: bcrypt.hashSync('EliteDrug@2026', 10)
-const ADMIN_CREDENTIALS = {
-  email: 'admin@elitedrug.com',
-  passwordHash: '$2b$10$oPORiA49aYRyXUC9feLO3.1Wa2x36EPmBOr.qkkK7AJAheiI2azUG', // EliteDrug@2026
-};
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? process.env.ADMIN_EMAIL ?? '')
+  .split(',')
+  .map((email) => email.trim().toLowerCase())
+  .filter(Boolean);
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required');
+if (!JWT_SECRET || ADMIN_EMAILS.length === 0 || !ADMIN_PASSWORD) {
+  throw new Error('JWT_SECRET, ADMIN_EMAIL/ADMIN_EMAILS, and ADMIN_PASSWORD environment variables are required');
+}
+
+function safeCompare(left: string, right: string) {
+  const leftBuffer = Buffer.from(left);
+  const rightBuffer = Buffer.from(right);
+
+  if (leftBuffer.length !== rightBuffer.length) {
+    return false;
+  }
+
+  return timingSafeEqual(leftBuffer, rightBuffer);
 }
 
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
+    const adminPassword = ADMIN_PASSWORD as string;
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
+    const normalizedPassword = typeof password === 'string' ? password : '';
 
-    // Validate credentials with bcrypt
-    const isValidEmail = email === ADMIN_CREDENTIALS.email;
-    const isValidPassword = await bcrypt.compare(password, ADMIN_CREDENTIALS.passwordHash);
+    const isValidEmail = ADMIN_EMAILS.some((adminEmail) => safeCompare(normalizedEmail, adminEmail));
+    const isValidPassword = safeCompare(normalizedPassword, adminPassword);
     
     if (isValidEmail && isValidPassword) {
-      // Generate JWT token
       const token = sign(
-        { email, role: 'admin' },
+        { email: normalizedEmail, role: 'admin' },
         JWT_SECRET,
         { expiresIn: '7d' }
       );

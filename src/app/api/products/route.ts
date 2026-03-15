@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient, createAdminClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
+export const revalidate = 300;
+
+const PRODUCTS_CACHE_CONTROL = 'public, s-maxage=300, stale-while-revalidate=3600';
+
 // GET - Fetch all products
 export async function GET() {
   try {
-    console.log('📡 Fetching products from Supabase...');
-    
-    const supabase = await createAdminClient();
+    const supabase = await createServerClient();
     
     const { data, error } = await supabase
       .from('products')
@@ -102,9 +104,11 @@ export async function GET() {
         }
       };
     });
-
-    console.log('✅ Fetched products:', normalizedData.length);
-    return NextResponse.json(normalizedData);
+    return NextResponse.json(normalizedData, {
+      headers: {
+        'Cache-Control': PRODUCTS_CACHE_CONTROL,
+      },
+    });
   } catch (error) {
     console.error('❌ Error fetching products:', error);
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
@@ -207,9 +211,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Revalidate pages that show products
     revalidatePath('/');
     revalidatePath('/products');
+    revalidatePath('/products/[slug]', 'page');
+    revalidatePath('/categories/[id]', 'page');
     revalidatePath(`/products/${slug}`);
 
     console.log('✅ Product created:', data.id);

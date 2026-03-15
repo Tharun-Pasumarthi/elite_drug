@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@/lib/supabase/server';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 120;
+
+const ANNOUNCEMENTS_CACHE_CONTROL = 'public, s-maxage=120, stale-while-revalidate=1800';
 
 // GET - Fetch active announcements for public view
 export async function GET(request: NextRequest) {
@@ -21,7 +23,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ announcements });
+    return NextResponse.json(
+      { announcements },
+      {
+        headers: {
+          'Cache-Control': ANNOUNCEMENTS_CACHE_CONTROL,
+        },
+      }
+    );
   } catch (error: any) {
     console.error('Error in GET /api/announcements:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });

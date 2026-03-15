@@ -65,6 +65,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                       src={validImages[selectedImageIndex] || '/images/placeholder.svg'}
                       alt={product.name}
                       fill
+                      sizes="(min-width: 768px) 40vw, 100vw"
                       className="object-contain p-6"
                     />
                     {product.isPrescription && (
@@ -92,6 +93,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                               src={img}
                               alt={`${product.name} ${idx + 1}`}
                               fill
+                              sizes="80px"
                               className="object-contain"
                             />
                           </div>

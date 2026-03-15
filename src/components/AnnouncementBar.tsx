@@ -37,7 +37,7 @@ export default function AnnouncementBar() {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await fetch('/api/announcements');
+      const response = await fetch('/api/announcements', { cache: 'force-cache' });
       const data = await response.json();
       if (data.announcements && data.announcements.length > 0) {
         setAnnouncements(data.announcements);

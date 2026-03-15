@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
@@ -121,7 +121,7 @@ export default function AboutSection() {
         </div>
 
         {/* Founder Image and Timeline Grid */}
-        <div className="grid md:grid-cols-2 gap-y-16 md:gap-12 items-start mb-24">
+        <div className="grid md:grid-cols-2 gap-y-20 md:gap-12 items-start mb-24">
           {/* Left: Founder Flip Card */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -130,99 +130,95 @@ export default function AboutSection() {
             viewport={{ once: true }}
             className="relative"
           >
-            <div 
+            <div
               ref={cardRef}
-              className="relative w-full h-[600px] perspective-[1000px] cursor-pointer"
+              className="relative w-full cursor-pointer"
               onMouseEnter={handleDesktopHover}
               onMouseLeave={handleDesktopLeave}
               onClick={handleMobileClick}
             >
-              <motion.div
-                className="relative w-full h-full transition-transform duration-700 transform-style-3d"
-                animate={{ rotateY: isFlipped ? 180 : 0 }}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                {/* Front of Card - Founder Image */}
-                <div 
-                  className="absolute inset-0 backface-hidden"
-                  style={{ backfaceVisibility: 'hidden' }}
-                >
-                  {/* Glow Effect */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 via-amber-400 to-orange-400 dark:from-orange-500 dark:via-amber-500 dark:to-orange-500 rounded-3xl opacity-20 group-hover:opacity-40 blur-2xl transition-opacity duration-500"></div>
-                  
-                  {/* Image container */}
-                  <div className="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-2xl hover:shadow-orange-500/30 hover:shadow-[0_20px_70px_-10px] transition-all duration-500 h-full">
-                    {/* Mobile Tap Hint - Only visible on mobile */}
-                    {isMobile && !isFlipped && (
-                      <div className="absolute top-6 left-6 bg-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg animate-pulse z-20">
-                        👆 Tap to read story
+              <AnimatePresence initial={false} mode="wait">
+                {!isFlipped ? (
+                  <motion.div
+                    key="founder-portrait"
+                    initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -18, scale: 0.98 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    className="relative bg-white dark:bg-slate-800 rounded-3xl p-3 shadow-2xl hover:shadow-orange-500/20 hover:shadow-[0_20px_70px_-10px] transition-all duration-500"
+                  >
+                    {isMobile && (
+                      <div className="absolute top-5 left-5 bg-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg animate-pulse z-20">
+                        Tap to read story
                       </div>
                     )}
-                    
-                    <div className="relative h-[500px] rounded-2xl overflow-hidden">
+
+                    <div className="relative h-[430px] sm:h-[520px] md:h-[500px] rounded-2xl overflow-hidden">
                       <Image
                         src="/images/founder.jpg"
                         alt="Founder of Elite Drug Pharma"
                         fill
+                        sizes="(min-width: 1024px) 40vw, (min-width: 768px) 48vw, 100vw"
                         className="object-cover"
-                        priority
                       />
-                      {/* Gradient overlay at bottom */}
                       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    </div>
-                    
-                    {/* Founder Info Badge */}
-                    <div className="absolute bottom-8 right-8 bg-gradient-to-br from-orange-500 to-amber-500 text-white px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20">
-                      <p className="text-2xl font-bold mb-1">Ranjit Javvaji</p>
-                      <p className="text-sm opacity-90">Founder & CEO</p>
-                    </div>
-                  </div>
 
-                  {/* Founder Title Below Image */}
-                  <div className="mt-6 text-center mb-8">
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      Founder of Elite Drug Pharma
-                    </h3>
-                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 italic">
-                      "Committed to making quality healthcare accessible to all"
-                    </p>
-                  </div>
-                </div>
+                      <div className="absolute bottom-5 right-5 bg-gradient-to-br from-orange-500 to-amber-500 text-white px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 max-w-[80%]">
+                        <p className="text-lg md:text-2xl font-bold mb-1 leading-tight">Ranjit Javvaji</p>
+                        <p className="text-xs md:text-sm opacity-90">Founder & CEO</p>
+                      </div>
+                    </div>
 
-                {/* Back of Card - Story */}
-                <div 
-                  className="absolute inset-0 backface-hidden rotate-y-180"
-                  style={{ 
-                    backfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)'
-                  }}
-                >
-                  <div className="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl h-full overflow-y-auto border-2 border-orange-200 dark:border-orange-800">
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="text-4xl">📖</span>
-                      <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                        Our Story
+                    <div className="px-4 pb-5 pt-6 md:px-6 md:pb-6 text-center">
+                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                        Founder of Elite Drug Pharma
                       </h3>
-                    </div>
-                    
-                    <div className="prose prose-lg dark:prose-invert max-w-none">
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify whitespace-pre-line">
-                        {founderStory}
+                      <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 italic leading-relaxed">
+                        "Committed to making quality healthcare accessible to all"
                       </p>
                     </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="founder-story"
+                    initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -18, scale: 0.98 }}
+                    transition={{ duration: 0.45, ease: 'easeOut' }}
+                    className="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border-2 border-orange-200 dark:border-orange-800 h-[620px] sm:h-[660px] md:h-[680px] overflow-hidden"
+                  >
+                    <div className="h-full overflow-y-auto p-6 md:p-8">
+                      <div className="flex items-center gap-3 mb-6">
+                        <span className="text-4xl">📖</span>
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                          Our Story
+                        </h3>
+                      </div>
 
-                    {/* Decorative Quote */}
-                    <div className="mt-6 border-l-4 border-orange-500 dark:border-orange-400 pl-6 py-4 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-r-xl">
-                      <p className="text-gray-900 dark:text-gray-100 italic font-medium">
-                        "From a common man to a successful business leader - a journey built on integrity, quality, and kindness."
-                      </p>
-                      <p className="text-gray-700 dark:text-gray-300 text-sm mt-2 font-semibold">
-                        — Ranjit Javvaji, Founder & CEO
-                      </p>
+                      <div className="prose prose-base md:prose-lg dark:prose-invert max-w-none">
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify whitespace-pre-line">
+                          {founderStory}
+                        </p>
+                      </div>
+
+                      <div className="mt-6 border-l-4 border-orange-500 dark:border-orange-400 pl-6 py-4 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-r-xl">
+                        <p className="text-gray-900 dark:text-gray-100 italic font-medium">
+                          "From a common man to a successful business leader - a journey built on integrity, quality, and kindness."
+                        </p>
+                        <p className="text-gray-700 dark:text-gray-300 text-sm mt-2 font-semibold">
+                          — Ranjit Javvaji, Founder & CEO
+                        </p>
+                      </div>
+
+                      <div className="mt-6 flex justify-end">
+                        <span className="inline-flex items-center rounded-full bg-gray-100 dark:bg-slate-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300">
+                          {isMobile ? 'Tap again to view portrait' : 'Move cursor away to close'}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
 

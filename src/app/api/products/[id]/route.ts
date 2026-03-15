@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase, supabaseAdmin } from '@/lib/supabase';
+import { revalidatePath } from 'next/cache';
+
+export const revalidate = 300;
+
+const PRODUCT_CACHE_CONTROL = 'public, s-maxage=300, stale-while-revalidate=3600';
 
 // GET - Fetch single product
 export async function GET(
@@ -32,8 +37,11 @@ export async function GET(
         gallery: data.images
       };
     }
-
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': PRODUCT_CACHE_CONTROL,
+      },
+    });
   } catch (error) {
     console.error('Error fetching product:', error);
     return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });
@@ -135,6 +143,12 @@ export async function PUT(
     }
 
     console.log('✅ Product updated successfully:', id);
+    revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/products/[slug]', 'page');
+    revalidatePath('/categories/[id]', 'page');
+    revalidatePath(`/products/${data[0].slug}`);
+
     return NextResponse.json(data[0]);
   } catch (error: any) {
     console.error('❌ Error updating product:', error);
@@ -155,12 +169,26 @@ export async function DELETE(
     const params = await Promise.resolve(context.params);
     const { id } = params;
 
+    const { data: product } = await supabaseAdmin
+      .from('products')
+      .select('slug')
+      .eq('id', id)
+      .single();
+
     const { error } = await supabase
       .from('products')
       .delete()
       .eq('id', id);
 
     if (error) throw error;
+
+    revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/products/[slug]', 'page');
+    revalidatePath('/categories/[id]', 'page');
+    if (product?.slug) {
+      revalidatePath(`/products/${product.slug}`);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

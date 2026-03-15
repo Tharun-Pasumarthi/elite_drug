@@ -26,7 +26,7 @@ export default function AnnouncementsPage() {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await fetch('/api/announcements');
+      const response = await fetch('/api/announcements', { cache: 'force-cache' });
       const data = await response.json();
       setAnnouncements(data.announcements || []);
     } catch (error) {

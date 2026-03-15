@@ -28,7 +28,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
     // Fetch random products
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch('/api/products', { cache: 'force-cache' });
         const allProducts = await response.json();
         
         // Filter out current product and get random 10 products
@@ -138,6 +138,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                         }
                         alt={product.name}
                         fill
+                        sizes="(min-width: 1280px) 20vw, (min-width: 768px) 25vw, 50vw"
                         className="object-contain drop-shadow-md group-hover:drop-shadow-2xl transition-all duration-500"
                       />
                     </div>
@@ -159,7 +160,7 @@ export default function MoreProductsCarousel({ currentProductId }: MoreProductsC
                   </p>
                   
                   {/* Price Display */}
-                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-2 border border-orange-200 dark:border-orange-808 mb-2">
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-lg p-2 border border-orange-200 dark:border-orange-800 mb-2">
                     <p className="text-[10px] text-gray-600 dark:text-gray-400 mb-1">MRP</p>
                     <p className="text-base font-black text-orange-600 dark:text-orange-400">₹{product.price}</p>
                   </div>

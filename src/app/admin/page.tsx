@@ -74,7 +74,7 @@ export default function AdminLogin() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@elitedrug.com"
+                  placeholder="admin@elitedrug.org"
                   className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[#FF8C00] focus:outline-none transition-colors"
                   required
                 />
