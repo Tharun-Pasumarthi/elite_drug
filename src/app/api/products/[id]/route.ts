@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase, supabaseAdmin } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 
 export const revalidate = 300;
@@ -116,7 +116,7 @@ export async function PUT(
     
     console.log('💾 Database data:', JSON.stringify(dbData, null, 2));
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('products')
       .update(dbData)
       .eq('id', id)
@@ -175,7 +175,7 @@ export async function DELETE(
       .eq('id', id)
       .single();
 
-    const { error } = await supabase
+    const { error } = await supabaseAdmin
       .from('products')
       .delete()
       .eq('id', id);
